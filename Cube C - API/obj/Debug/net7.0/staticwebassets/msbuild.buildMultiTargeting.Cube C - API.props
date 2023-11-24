@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Cube C - API.props" />
+</Project>
