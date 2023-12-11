@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
 
-builder.Services.AddDbContextPool<UserContext>(options => options.UseMySql("Server=<under-code.fr>;port=3306;Database=cesi;User Id=cesi;Password=giueza7686çeza;H;", serverVersion));
+builder.Services.AddDbContextPool<UserContext>(options => options.UseMySql("server=under-code.fr;database=cesi;user id=cesi;password='giueza7686çeza;H'", serverVersion));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

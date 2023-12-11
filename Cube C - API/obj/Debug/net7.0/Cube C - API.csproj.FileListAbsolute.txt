@@ -128,3 +128,8 @@ C:/Users/mtass/RiderProjects/Cube C - API/Cube C - API/obj/Debug/net7.0/ref/Cube
 /media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.pdb
 /media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.genruntimeconfig.cache
 /media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/ref/Cube C - API.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Humanizer.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Mono.TextTemplating.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.CodeDom.dll
