@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mtass\\RiderProjects\\Cube C - API\\Cube C - API\\Cube C - API.csproj": {}
+    "/home/20014974/dev_cesi/CubeC_API/Cube C - API/Cube C - API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mtass\\RiderProjects\\Cube C - API\\Cube C - API\\Cube C - API.csproj": {
+    "/home/20014974/dev_cesi/CubeC_API/Cube C - API/Cube C - API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mtass\\RiderProjects\\Cube C - API\\Cube C - API\\Cube C - API.csproj",
+        "projectUniqueName": "/home/20014974/dev_cesi/CubeC_API/Cube C - API/Cube C - API.csproj",
         "projectName": "Cube C - API",
-        "projectPath": "C:\\Users\\mtass\\RiderProjects\\Cube C - API\\Cube C - API\\Cube C - API.csproj",
-        "packagesPath": "C:\\Users\\mtass\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mtass\\RiderProjects\\Cube C - API\\Cube C - API\\obj\\",
+        "projectPath": "/home/20014974/dev_cesi/CubeC_API/Cube C - API/Cube C - API.csproj",
+        "packagesPath": "/home/20014974/.nuget/packages/",
+        "outputPath": "/home/20014974/dev_cesi/CubeC_API/Cube C - API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mtass\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/20014974/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Users\\mtass\\.dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +43,10 @@
               "version": "[7.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[7.0.14, )"
             },
@@ -71,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\mtass\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.114/RuntimeIdentifierGraph.json"
         }
       }
     }
