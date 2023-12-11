@@ -6,10 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<UserContext>(opt => opt.UseInMemoryDatabase("Users"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
 
+builder.Services.AddDbContextPool<UserContext>(options => options.UseMySql("Server=<under-code.fr>;port=3306;Database=cesi;User Id=cesi;Password=giueza7686çeza;H;", serverVersion));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

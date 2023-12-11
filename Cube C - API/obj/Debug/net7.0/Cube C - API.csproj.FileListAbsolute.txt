@@ -66,3 +66,65 @@ C:/Users/mtass/RiderProjects/Cube C - API/Cube C - API/obj/Debug/net7.0/ref/Cube
 /home/20014974/dev_cesi/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.pdb
 /home/20014974/dev_cesi/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.genruntimeconfig.cache
 /home/20014974/dev_cesi/CubeC_API/Cube C - API/obj/Debug/net7.0/ref/Cube C - API.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/appsettings.Development.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/appsettings.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Cube C - API
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Cube C - API.deps.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Cube C - API.runtimeconfig.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Cube C - API.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Cube C - API.pdb
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Google.Protobuf.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/K4os.Compression.LZ4.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/K4os.Compression.LZ4.Streams.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/K4os.Hash.xxHash.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.AspNetCore.OpenApi.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/MySql.Data.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/MySqlConnector.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Pomelo.EntityFrameworkCore.MySql.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.Drawing.Common.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.Security.Permissions.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.Windows.Extensions.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/ZstdSharp.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win-x64/native/comerr64.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win-x64/native/gssapi64.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win-x64/native/k5sprt64.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win-x64/native/krb5_64.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win-x64/native/krbcc64.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.csproj.AssemblyReference.cache
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.GeneratedMSBuildEditorConfig.editorconfig
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.AssemblyInfoInputs.cache
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.AssemblyInfo.cs
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.csproj.CoreCompileInputs.cache
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.MvcApplicationPartsAssemblyInfo.cs
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.MvcApplicationPartsAssemblyInfo.cache
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets/msbuild.Cube C - API.Microsoft.AspNetCore.StaticWebAssets.props
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets/msbuild.build.Cube C - API.props
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Cube C - API.props
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Cube C - API.props
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets.pack.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets.build.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/staticwebassets.development.json
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/scopedcss/bundle/Cube C - API.styles.css
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.csproj.CopyComplete
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/refint/Cube C - API.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.pdb
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/Cube C - API.genruntimeconfig.cache
+/media/maxime/Data/dev/CubeC_API/Cube C - API/obj/Debug/net7.0/ref/Cube C - API.dll
