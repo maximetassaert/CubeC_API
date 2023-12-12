@@ -1,6 +1,6 @@
 .env
 
-obj/*
+obj/
 
 /Cube C - API/Cube C - API.csproj
 *.swp
