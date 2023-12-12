@@ -2,7 +2,9 @@ namespace Cube_C___API.Models;
 
 public class User
 {
-    public long Id { get; set; }
+    public int Id { get; init; }
     
-    public string name { get; set; }
+    public string Mail { get; set; }
+    public string Password { get; set; }
+
 }

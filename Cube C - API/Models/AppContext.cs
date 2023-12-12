@@ -2,8 +2,8 @@ namespace Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-public class UserContext : DbContext
+public class AppContext : DbContext
 {
-        public UserContext(DbContextOptions<UserContext> options) : base(options) {}
+        public AppContext(DbContextOptions<AppContext> options) : base(options) {}
         public DbSet<User> Users { get; set; } = null!;
 }
