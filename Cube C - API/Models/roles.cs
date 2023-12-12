@@ -4,5 +4,5 @@ public class roles
 {
     public int id { get; set; }
     
-    public name mail { get; set; }
+    public string name { get; set; }
 }
