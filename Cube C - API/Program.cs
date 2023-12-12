@@ -1,5 +1,10 @@
 using Cube_C___API.Models;
+using Cube_C___API.Repositories;
 using Microsoft.EntityFrameworkCore;
+using AppContext = Cube_C___API.Models.AppContext;
+
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,7 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
 
-builder.Services.AddDbContextPool<UserContext>(options => options.UseMySql("server=under-code.fr;database=cesi;user id=cesi;password='giueza7686çeza;H'", serverVersion));
+builder.Services.AddDbContextPool<AppContext>(options => options.UseMySql(Environment.GetEnvironmentVariable("connectionString"), serverVersion));
+builder.Services.AddScoped<UsersRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
