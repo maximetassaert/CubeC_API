@@ -1,5 +1,8 @@
 .env
 Cube C - API/obj/Debug/*
+Cube C - API/obj/*
+Cube C - API/obj/Debug/net7.0/*
+
 
 
 
