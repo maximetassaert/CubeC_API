@@ -3,12 +3,13 @@ using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using AppContext = Cube_C___API.Models.AppContext;
 
 #nullable disable
 
 namespace Cube_C___API.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(AppContext))]
     partial class UserContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

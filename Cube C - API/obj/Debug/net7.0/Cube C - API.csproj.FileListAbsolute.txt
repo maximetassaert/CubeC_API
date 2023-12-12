@@ -133,3 +133,5 @@ C:/Users/mtass/RiderProjects/Cube C - API/Cube C - API/obj/Debug/net7.0/ref/Cube
 /media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
 /media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Mono.TextTemplating.dll
 /media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/System.CodeDom.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/DotNetEnv.dll
+/media/maxime/Data/dev/CubeC_API/Cube C - API/bin/Debug/net7.0/Sprache.dll

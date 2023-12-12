@@ -1,4 +1,6 @@
 .env
+
+obj/Debug/*
 obj/Debug/*
 obj/*
 obj/Debug/net7.0/*
