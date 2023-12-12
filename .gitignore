@@ -41,4 +41,7 @@ bld/
 [Oo]ut/
 msbuild.log
 msbuild.err
-msbuild.wrn
+msbuild.wrndebug.log
+debug.log
+debug.log
+.env
