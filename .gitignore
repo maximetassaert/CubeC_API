@@ -1,9 +1,6 @@
 .env
 
-obj/Debug/*
-obj/Debug/*
 obj/*
-obj/Debug/net7.0/*
 
 /Cube C - API/Cube C - API.csproj
 *.swp
