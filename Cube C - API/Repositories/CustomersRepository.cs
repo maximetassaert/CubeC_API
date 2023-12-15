@@ -35,9 +35,9 @@ namespace Cube_C___API.Repositories;
             _context.Customers.Remove(customer);
         }
 
-        public void Update(User user)
+        public void Update(Customer customer)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(customer).State = EntityState.Modified;
         }
 
         public void Save()
