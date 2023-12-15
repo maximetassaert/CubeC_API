@@ -1,6 +1,6 @@
 using Cube_C___API.Repositories;
 using Microsoft.EntityFrameworkCore;
-using AppContext = Cube_C___API.Models.AppContext;
+using AppContext = Cube_C___API.AppContext;
 
 DotNetEnv.Env.Load();
 
@@ -12,10 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
 
-builder.Services.AddDbContextPool<AppContext>(options => options.UseMySql(Environment.GetEnvironmentVariable("connectionString"), serverVersion));
+builder.Services.AddDbContextPool<AppContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
 builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<CustomersRepository>();
+
 
 
 var app = builder.Build();

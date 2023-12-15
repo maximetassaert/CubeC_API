@@ -22,15 +22,15 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     //[Route("findAll")]
-    public IEnumerable<User> FindAll()
+    public IEnumerable<User> FindAllUsers()
     {
-        return UsersRepository.GetStudents();
+        return UsersRepository.FindAll();
     }
     
-    [HttpPost(Name = "create")]
-    public void CreateUser(User user)
+    [HttpPost]
+    public void Create(User user)
     {
-        UsersRepository.InsertUser(user);
+        UsersRepository.Insert(user);
         UsersRepository.Save();
     }
 }

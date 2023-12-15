@@ -4,7 +4,7 @@
     <option name="keyValueStorage">
       <map>
         <entry key="Common:buildConfiguration" value="Debug" />
-        <entry key="Common:da7c6c69-818e-4076-959a-9a9f23d5b5ae:dbContext" value="Cube_C___API.Models.UserContext" />
+        <entry key="Common:da7c6c69-818e-4076-959a-9a9f23d5b5ae:dbContext" value="Cube_C___API.AppContext" />
         <entry key="Common:enableDiagnosticLogging" value="false" />
         <entry key="Common:noBuild" value="false" />
         <entry key="Common:outputFolder" value="Migrations" />

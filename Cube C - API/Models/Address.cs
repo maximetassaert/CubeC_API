@@ -2,13 +2,13 @@ namespace Cube_C___API.Models;
 
 public class Address
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
     
-    public string streetName { get; set; }
+    public string AddressLine{ get; set; }
     
-    public string cp { get; set; }
+    public string PostCode { get; set; }
     
-    public string city { get; set; }
+    public string City { get; set; }
     
-    public string country { get; set; }
+    public string Country { get; set; }
 }

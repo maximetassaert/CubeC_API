@@ -6,5 +6,5 @@ public class User
     
     public string Mail { get; set; }
     public string Password { get; set; }
-
+    public ICollection<Roles> Roles { get; set; } = new List<Roles>();
 }

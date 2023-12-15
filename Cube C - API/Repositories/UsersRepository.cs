@@ -1,67 +1,57 @@
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
-using AppContext = Cube_C___API.Models.AppContext;
+using AppContext = Cube_C___API.AppContext;
 
 namespace Cube_C___API.Repositories;
 
-
-    public class UsersRepository : IDisposable
+public class UsersRepository : IDisposable
+{
+    private readonly AppContext _context;
+    
+    public UsersRepository(AppContext context)
     {
-        private AppContext context;
-
-        public UsersRepository(AppContext context)
-        {
-            this.context = context;
-        }
-
-        public IEnumerable<User> GetStudents()
-        {
-            return context.Users.ToList();
-        }
-
-        public User GetUserByID(int id)
-        {
-            return context.Users.Find(id);
-        }
-
-        public void InsertUser(User user)
-        {
-            context.Users.Add(user);
-        }
-
-        public void DeleteUser(int userId)
-        {
-            User user = context.Users.Find(userId);
-            context.Users.Remove(user);
-        }
-
-        public void UpdateUser(User user)
-        {
-            context.Entry(user).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        _context = context;
     }
+    public IEnumerable<User> FindAll()
+    {
+        return _context.Users.ToList();
+    }
+    public User FindById(int id)
+    {
+        return _context.Users.Find(id);
+    }
+    public void Insert(User user)
+    {
+        _context.Users.Add(user);
+    }
+    public void Delete(int id)
+    {
+        User user = _context.Users.Find(id);
+        _context.Users.Remove(user);
+    }
+    public void Update(User user)
+    {
+        _context.Entry(user).State = EntityState.Modified;
+    }
+    public void Save()
+    {
+        _context.SaveChanges();
+    }
+    private bool disposed = false;
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!this.disposed)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+        }
+        this.disposed = true;
+    }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+}
