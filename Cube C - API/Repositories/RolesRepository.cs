@@ -12,24 +12,24 @@ public class RolesRepository
     {
         _context = context;
     }
-    public IEnumerable<Roles> FindAll()
+    public IEnumerable<Role> FindAll()
     {
         return _context.Roles.ToList();
     }
-    public Roles FindById(int id)
+    public Role FindById(int id)
     {
         return _context.Roles.Find(id);
     }
-    public void Insert(Roles supplier)
+    public void Insert(Role role)
     {
-        _context.Roles.Add(roles);
+        _context.Roles.Add(role);
     }
     public void Delete(int id)
     {
-        Roles roles = _context.Roles.Find(id);
-        _context.Roles.Remove(supplier);
+        Role role = _context.Roles.Find(id);
+        _context.Roles.Remove(role);
     }
-    public void Update(Roles roles)
+    public void Update(Role roles)
     {
         _context.Entry(roles).State = EntityState.Modified;
     }

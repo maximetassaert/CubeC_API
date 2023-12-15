@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Cube_C___API.Models;
 
-public class Roles
+public class Role
 {
     public int Id { get; init; }
     [Required]
