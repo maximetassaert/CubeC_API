@@ -7,4 +7,7 @@ public class Roles
     public int Id { get; init; }
     [Required]
     public string Name { get; set; }
+    
+    public List<User> Users { get; set; } = new List<User>();
+
 }

@@ -12,5 +12,5 @@ public class User
     [Required]
     public string Password { get; set; }
     
-    public ICollection<Roles> Roles { get; set; } = new List<Roles>();
+    public List<Roles> Roles { get; set; } = new List<Roles>();
 }
