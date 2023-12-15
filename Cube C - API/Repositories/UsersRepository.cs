@@ -14,11 +14,16 @@ public class UsersRepository : IDisposable
     }
     public IEnumerable<User> FindAll()
     {
-        return _context.Users.ToList();
+        return _context.Users
+            .Include(user => user.Roles)
+            .ToList();
     }
-    public User FindById(int id)
+    public User? FindById(int id)
     {
-        return _context.Users.Find(id);
+        return _context.Users
+            .Include(user => user.Roles)
+            // .Find(id);
+            .FirstOrDefault(user => user.Id == id);
     }
     public void Insert(User user)
     {

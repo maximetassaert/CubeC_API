@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Cube_C___API.Models;
 
@@ -11,6 +12,6 @@ public class User
     
     [Required]
     public string Password { get; set; }
-    
+
     public List<Roles> Roles { get; set; } = new List<Roles>();
 }

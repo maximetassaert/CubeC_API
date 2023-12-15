@@ -21,7 +21,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    //[Route("findAll")]
+    // [Route("FindAll")]
     public IEnumerable<User> FindAllUsers()
     {
         return UsersRepository.FindAll();
@@ -33,6 +33,14 @@ public class UsersController : ControllerBase
         UsersRepository.Insert(user);
         UsersRepository.Save();
     }
+
+    [HttpGet]
+    [Route("{id}")]
+    public User FindById(int id)
+    {
+        return UsersRepository.FindById(id);
+    }
+        
 }
     
     
