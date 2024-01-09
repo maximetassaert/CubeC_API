@@ -1,5 +1,9 @@
+using System.Text;
+using Cube_C___API;
 using Cube_C___API.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using AppContext = Cube_C___API.AppContext;
 
 DotNetEnv.Env.Load();
@@ -16,8 +20,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<AppContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<CustomersRepository>();
+builder.Services.AddScoped<JwtAuthenticationService>();
 
-
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("Jwt-secret")))
+    };
+});
 
 var app = builder.Build();
 
@@ -30,8 +48,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 
+app.UseRouting();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

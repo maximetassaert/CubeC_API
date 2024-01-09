@@ -1,6 +1,5 @@
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
-using AppContext = Cube_C___API.AppContext;
 
 namespace Cube_C___API.Repositories;
 
@@ -24,6 +23,13 @@ public class UsersRepository : IDisposable
             .Include(user => user.Roles)
             // .Find(id);
             .FirstOrDefault(user => user.Id == id);
+    }
+    
+    public User? findByEmail(string mail)
+    {
+        return _context.Users
+            .Include(user => user.Roles)
+            .FirstOrDefault(user => user.Mail == mail);
     }
     public void Insert(User user)
     {
