@@ -12,9 +12,12 @@ using Microsoft.IdentityModel.Tokens;
 public class JwtAuthenticationService
 {
 
-    private UsersRepository _usersRepository;
-    public JwtAuthenticationService(UsersRepository usersRepository)
+    private readonly UsersRepository _usersRepository;
+    private readonly CustomersRepository _customersRepository;
+
+    public JwtAuthenticationService(UsersRepository usersRepository, CustomersRepository customersRepository)
     {
+        _customersRepository = customersRepository;
         _usersRepository = usersRepository;
     }
     
@@ -27,8 +30,7 @@ public class JwtAuthenticationService
             return null;
         }
         
-        string hashedPassword = password;
-        if (hashedPassword != user.Password)
+        if (!Utils.VerifyPassword(password, user.Password))
         {
             // mauvais password
             return null;
@@ -41,8 +43,20 @@ public class JwtAuthenticationService
     {
         List<Claim> claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Email, user.Mail)
+            new Claim(ClaimTypes.Email, user.Mail),
+            new Claim("userId", user.Id.ToString())
         };
+
+        var customer = _customersRepository.FindByUserId(user.Id);
+        if (customer != null)
+        {
+            claims.Add(new Claim("customerId", customer.Id.ToString()));
+        }
+
+        foreach (var role in user.Roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role.Name));
+        }
         
         SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("Jwt-secret") ?? throw new Exception("Secret Jwt non définit !")));
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()

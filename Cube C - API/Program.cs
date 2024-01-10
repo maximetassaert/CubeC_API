@@ -2,6 +2,8 @@ using System.Text;
 using Cube_C___API;
 using Cube_C___API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AppContext = Cube_C___API.AppContext;
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<AppContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<CustomersRepository>();
+builder.Services.AddScoped<CartsRepository>();
 builder.Services.AddScoped<JwtAuthenticationService>();
 
 builder.Services.AddAuthentication(options =>
@@ -37,6 +40,14 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,9 +59,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-app.UseRouting();
-app.UseAuthorization();
 app.MapControllers();
+app.UseAuthorization();
 
 app.Run();
