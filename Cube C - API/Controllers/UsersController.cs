@@ -1,5 +1,6 @@
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cube_C___API.Controllers;
@@ -21,15 +22,18 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    // [Route("FindAll")]
+    [Authorize(Roles = Role.ADMIN)]
     public IEnumerable<User> FindAllUsers()
     {
         return UsersRepository.FindAll();
     }
     
     [HttpPost]
+    [AllowAnonymous] 
     public void Create(User user)
     {
+        user.Password = Utils.HashPassword(user.Password);
+        
         UsersRepository.Insert(user);
         UsersRepository.Save();
     }

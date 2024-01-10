@@ -8,9 +8,9 @@ public class Cart
     [Required] 
     public DateTime CreateDate { get; init; } = new DateTime();
     [Required]
-    public int CustomerId { get; init; }
+    public int CustomerId { get; set; }
 
-    public Customer? Customer { get; init; }
+    public Customer? Customer { get; set; }
 
     public List<CartLine> CartLines { get; set; } = new List<CartLine>();
 
