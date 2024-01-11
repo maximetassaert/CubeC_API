@@ -1,3 +1,5 @@
+using Cube_C___API.Dtos.Role;
+using Cube_C___API.Dtos.User;
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,17 +13,34 @@ public class UsersRepository : IDisposable
     {
         _context = context;
     }
-    public IEnumerable<User> FindAll()
+    public IEnumerable<GetUserDto> FindAll()
     {
+        // return _context.Users
+        //     .Include(user => user.Roles)
+        //     .ToList();
         return _context.Users
             .Include(user => user.Roles)
+            .Select(user => new GetUserDto
+            {
+                Id = user.Id,
+                Mail = user.Mail,
+                Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name}).ToList()
+            })
             .ToList();
-    }
-    public User? FindById(int id)
+        }
+    
+    public GetUserDto? FindById(int id)
     {
         return _context.Users
             .Include(user => user.Roles)
             // .Find(id);
+            .Where(user => user.Id == id )
+            .Select(user => new GetUserDto
+            {
+                Id = user.Id,
+                Mail = user.Mail,
+                Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name}).ToList()
+            })
             .FirstOrDefault(user => user.Id == id);
     }
     

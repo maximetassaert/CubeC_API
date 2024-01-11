@@ -1,3 +1,4 @@
+using Cube_C___API.Dtos.Role;
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
 using AppContext = Cube_C___API.AppContext;
@@ -12,9 +13,15 @@ public class RolesRepository
     {
         _context = context;
     }
-    public IEnumerable<Role> FindAll()
+    public IEnumerable<GetRoleDto> FindAll()
     {
-        return _context.Roles.ToList();
+        return _context.Roles
+            .Select(role => new GetRoleDto
+            {
+                Name = role.Name,
+                })
+            .ToList();
+                
     }
     public Role FindById(int id)
     {

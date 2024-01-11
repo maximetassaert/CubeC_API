@@ -1,3 +1,4 @@
+using Cube_C___API.Dtos.User;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +24,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = Role.ADMIN)]
-    public IEnumerable<User> FindAllUsers()
+    public IEnumerable<GetUserDto> FindAllUsers()
     {
         return UsersRepository.FindAll();
     }
@@ -40,9 +41,16 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public User FindById(int id)
+    public GetUserDto FindById(int id)
     {
         return UsersRepository.FindById(id);
+    }
+
+    [HttpPatch]
+    public void Update(User user)
+    {
+        UsersRepository.Update(user);
+        UsersRepository.Save();
     }
         
 }
