@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Cube_C___API.Dtos.Cart;
 using Cube_C___API.Repositories;
 using Cube_C___API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,12 @@ public class CartsController : ControllerBase
     }
 
     [HttpPost]
-    public void Create(Cart cart)
+    public Cart Create(Cart cart)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
 
-        if (!Utils.IsAdminUser(identity) && cart.Id == 0)
+        if (!Utils.IsAdminUser(identity) || cart.CustomerId == 0)
         {
             var customerId =
                 int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
@@ -38,11 +39,12 @@ public class CartsController : ControllerBase
         }
         CartsRepository.Insert(cart);
         CartsRepository.Save();
+        return cart;
     }
 
     [HttpGet]
     [Route("{id}")]
-    public Cart FindById(int id)
+    public Cart? FindById(int id)
     {
         if (id == 0)
         {
@@ -56,5 +58,23 @@ public class CartsController : ControllerBase
             return CartsRepository.FindCartByCustomer(customerId);
         }
         return CartsRepository.FindById(id);
+    }
+    
+    [HttpPut]
+    public Cart Update(Cart cart)
+    {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
+
+        if (!Utils.IsAdminUser(identity) || cart.CustomerId == 0)
+        {
+            var customerId =
+                int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
+            cart.CustomerId = customerId;
+        }
+        
+        CartsRepository.Update(cart);
+        CartsRepository.Save();
+        return cart;
     }
 }

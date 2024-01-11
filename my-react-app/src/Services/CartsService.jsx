@@ -2,15 +2,17 @@ import axios, {HttpStatusCode} from "axios";
 
 export default class CartsService {
 
+    static configHeaders(bearerToken)  {
+        return {
+            headers: {
+                'Authorization': 'Bearer ' + bearerToken
+            }
+        }
+    }
     static async loadCart(cartId, token){
-        let config = {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        }
 
         try{
-            const cartResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/carts/' + cartId, config);
+            const cartResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/carts/' + cartId, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
             if(error.response.status === HttpStatusCode.Forbidden){
@@ -22,31 +24,34 @@ export default class CartsService {
         }
     }
 
-    static async addProductToCart(cartId, token){
-        let config = {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        }
-        let cartUrl = '';
-        if(cartId !== 0){
-            cartUrl = '/carts/' + cartId
-        }else{
-            cartUrl = '/carts/myCart';
-
-        }
+    static async updateCart(cart, token){
         try{
-            const cartResult = await axios.put(import.meta.env.VITE_API_BASE_URL + cartUrl, config);
+            const cartResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/carts/', cart, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
             if(error.response.status === HttpStatusCode.Forbidden){
-                console.error("Vous n'avez pas le droit de récupérer ce panier...")
+                console.error("ah...")
             }else{
                 console.error('Erreur de récupération du panier', error)
 
             }
         }
     }
+
+    static async createCart(cart, token){
+        try{
+            const cartResult = await axios.post(import.meta.env.VITE_API_BASE_URL + '/carts/', cart, this.configHeaders(token));
+            return cartResult.data;
+        }catch(error){
+            console.error(error)
+            if(error.response.status === HttpStatusCode.Forbidden){
+                console.error("ah...")
+            }else{
+                console.error('Erreur de récupération du panier', error)
+            }
+        }
+    }
+
 
 
 }
