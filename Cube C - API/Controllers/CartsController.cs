@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Cube_C___API.Repositories;
 using Cube_C___API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,15 @@ public class CartsController : ControllerBase
     [HttpPost]
     public void Create(Cart cart)
     {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
+
+        if (!Utils.IsAdminUser(identity))
+        {
+            var customerId =
+                int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
+            cart.CustomerId = customerId;
+        }
         CartsRepository.Insert(cart);
         CartsRepository.Save();
     }

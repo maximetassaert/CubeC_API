@@ -2,7 +2,6 @@ using Cube_C___API.Dtos.Role;
 using Cube_C___API.Dtos.User;
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
-using AppContext = Cube_C___API.AppContext;
 
 namespace Cube_C___API.Repositories;
 
@@ -43,6 +42,13 @@ public class UsersRepository : IDisposable
                 Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name}).ToList()
             })
             .FirstOrDefault(user => user.Id == id);
+    }
+    
+    public User? findByEmail(string mail)
+    {
+        return _context.Users
+            .Include(user => user.Roles)
+            .FirstOrDefault(user => user.Mail == mail);
     }
     public void Insert(User user)
     {

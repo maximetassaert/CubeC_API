@@ -1,6 +1,8 @@
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Role = Cube_C___API.Models.Role;
 
 namespace Cube_C___API.Controllers;
 
@@ -21,7 +23,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    //[Route("findAll")]
+    [Authorize(Roles = Role.ADMIN)]
     public IEnumerable<Customer> FindAll()
     {
         return CustomersRepository.FindAll();

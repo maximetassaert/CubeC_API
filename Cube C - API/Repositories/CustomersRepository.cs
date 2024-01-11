@@ -19,9 +19,14 @@ namespace Cube_C___API.Repositories;
             return _context.Customers.ToList();
         }
 
-        public Customer FindById(int id)
+        public Customer? FindById(int customerId)
         {
-            return _context.Customers.Find(id);
+            return _context.Customers.Find(customerId);
+        }
+        
+        public Customer? FindByUserId(int userId)
+        {
+            return _context.Customers.FirstOrDefault(customer => customer.UserId == userId);
         }
 
         public void Insert(Customer customer)
@@ -35,9 +40,9 @@ namespace Cube_C___API.Repositories;
             _context.Customers.Remove(customer);
         }
 
-        public void Update(User user)
+        public void Update(Customer customer)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(customer).State = EntityState.Modified;
         }
 
         public void Save()
