@@ -26,6 +26,9 @@ builder.Services.AddScoped<RolesRepository>();
 builder.Services.AddScoped<CustomersRepository>();
 builder.Services.AddScoped<CartsRepository>();
 builder.Services.AddScoped<JwtAuthenticationService>();
+builder.Services.AddScoped<ProductsRepository>();
+
+builder.Services.AddSession();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -70,6 +73,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
+app.UseSession();
 
 app.MapControllers();
 app.UseAuthorization();

@@ -32,6 +32,8 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
+        
+        HttpContext.Session.SetString("coucou", "salut bg blablablabalablabaalal");
 
         string token = _jwtAuthenticationService.GenerateToken(user);
 

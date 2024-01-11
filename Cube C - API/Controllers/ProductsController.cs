@@ -1,5 +1,6 @@
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cube_C___API.Controllers;
@@ -18,6 +19,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IEnumerable<Product> FindAllProducts()
     {
         return ProductsRepository.FindAll();

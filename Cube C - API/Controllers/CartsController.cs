@@ -30,7 +30,7 @@ public class CartsController : ControllerBase
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
 
-        if (!Utils.IsAdminUser(identity))
+        if (!Utils.IsAdminUser(identity) && cart.Id == 0)
         {
             var customerId =
                 int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
@@ -44,6 +44,17 @@ public class CartsController : ControllerBase
     [Route("{id}")]
     public Cart FindById(int id)
     {
+        if (id == 0)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
+
+        
+            var customerId =
+                int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
+        
+            return CartsRepository.FindCartByCustomer(customerId);
+        }
         return CartsRepository.FindById(id);
     }
 }

@@ -15,6 +15,11 @@ public class CartsRepository : IDisposable
     {
         return _context.Carts.ToList();
     }
+    
+    public Cart? FindCartByCustomer(int customerId)
+    {
+        return _context.Carts.ToList().FirstOrDefault(cart => cart.CustomerId == customerId && cart.Editable);
+    }
 
     public Cart FindById(int id)
     {

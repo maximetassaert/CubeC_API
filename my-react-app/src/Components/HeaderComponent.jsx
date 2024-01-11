@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { Typography, Button } from "@mui/material";
 
-import { Link } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {useCookies} from "react-cookie";
+import ProductTableComponent from "../Components/ProductTableComponent.jsx";
 
-const MainPage = () => {
+const HeaderComponent = () => {
     const [isLogged, setIsLogged] = useState(false)
+    const navigate = useNavigate();
 
     const [cookie, setCookie, removeCookie] = useCookies(['bearerToken']);
 
@@ -23,21 +25,26 @@ const MainPage = () => {
         removeCookie('bearerToken')
     }
 
+    const handleMyCart = (event) =>{
+        event.preventDefault();
+        navigate('/myCart')
+    }
+
     return (
-        <React.Fragment>
+        <>
             {!isLogged &&
                 <Link to="/login">Login here</Link>
             }
 
             {isLogged &&
                 <>
-                    <Typography>Vous êtes connecté !</Typography>
                     <Button onClick={handleDisconnect}>Se déconnecter</Button>
+                    <Button onClick={handleMyCart}>Mon panier</Button>
                 </>
             }
 
-        </React.Fragment>
+        </>
     );
 }
 
-export default MainPage;
+export default HeaderComponent;
