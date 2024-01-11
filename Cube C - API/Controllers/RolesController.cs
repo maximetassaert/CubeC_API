@@ -1,3 +1,4 @@
+using Cube_C___API.Dtos.Role;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ public class RolesController : ControllerBase
 
     [HttpGet]
     // [Route("FindAll")]
-    public IEnumerable<Role> FindAllRoles()
+    public IEnumerable<GetRoleDto> FindAllRoles()
     {
         return RolesRepository.FindAll();
     }

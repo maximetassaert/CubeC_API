@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContextPool<AppContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
 builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<RolesRepository>();
 builder.Services.AddScoped<CustomersRepository>();
 
 
