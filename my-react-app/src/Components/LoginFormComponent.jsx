@@ -38,8 +38,9 @@ const LoginFormComponent = () => {
 
                 if(result.data.bearerToken){
                     setCredentialsError(false)
-                    console.log("bearer : ", result.data.bearerToken)
                     setCookie('bearerToken', result.data.bearerToken)
+                    setCookie('roles', result.data.roles)
+
                     navigate('/')
                 }
 

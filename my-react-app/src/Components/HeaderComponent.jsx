@@ -23,6 +23,7 @@ const HeaderComponent = () => {
     const handleDisconnect = (event) =>{
         event.preventDefault();
         removeCookie('bearerToken')
+        removeCookie('roles')
     }
 
     const handleMyCart = (event) =>{
@@ -32,17 +33,26 @@ const HeaderComponent = () => {
 
     return (
         <>
+            <header>
             {!isLogged &&
                 <Link to="/login">Login here</Link>
             }
 
             {isLogged &&
                 <>
-                    <Button onClick={handleDisconnect}>Se déconnecter</Button>
-                    <Button onClick={handleMyCart}>Mon panier</Button>
+                <ul>
+                    <li>
+                        <Button onClick={handleDisconnect}>Se déconnecter</Button>
+                    </li>
+                    <li>
+                        <Button onClick={handleMyCart}>Mon panier</Button>
+                    </li>
+
+                </ul>
+
                 </>
             }
-
+            </header>
         </>
     );
 }
