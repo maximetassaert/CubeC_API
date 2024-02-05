@@ -4,6 +4,7 @@ import { Typography, Button } from "@mui/material";
 import {Link, useNavigate} from "react-router-dom"
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
+import ProductComponent from "./ProductComponent.jsx";
 
 const CartContentComponent = () => {
     const navigate = useNavigate();
@@ -31,6 +32,13 @@ const CartContentComponent = () => {
             }
             {!isLoading && myCart && myCart.cartLines.length === 0 &&
                 <>Votre panier est vide</>
+            }
+            {!isLoading && myCart && myCart.cartLines.length > 0 &&
+                myCart.cartLines.map((product, key) => {
+                    return (
+                        <Typography key={key} >{product.name} : {product.quantity}</Typography>
+                    )
+                })
             }
             {isLoading && <>chargement...</>}
         </>

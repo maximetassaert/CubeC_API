@@ -18,12 +18,12 @@ public class CartsRepository : IDisposable
     
     public Cart? FindCartByCustomer(int customerId)
     {
-        return _context.Carts.ToList().FirstOrDefault(cart => cart.CustomerId == customerId && cart.Editable);
+        return _context.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product).FirstOrDefault(cart => cart.CustomerId == customerId && cart.Editable);
     }
 
     public Cart? FindById(int id)
     {
-        return _context.Carts.Find(id);
+        return _context.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product).FirstOrDefault(cart => cart.Id == id);
     }
 
     public void Insert(Cart cart)

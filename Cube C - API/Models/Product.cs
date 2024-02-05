@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Cube_C___API.Models;
 
@@ -20,5 +21,6 @@ public class Product
     
     [Required]
     public int CategoryId { get; set; }
+    [JsonIgnore]
     public Category? Category { get; set; }
 }
