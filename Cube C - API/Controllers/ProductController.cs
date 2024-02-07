@@ -10,102 +10,89 @@ namespace Cube_C___API.Controllers;
 [Route("[controller]")]
 public class ProductController : ControllerBase
 {
-    private readonly IRepositoryData<Product> _repositoryData;
     private readonly IRepositoryData<Category> _repositoryCategory;
+    private readonly IRepositoryData<Product> _repositoryProduct;
 
 
-    public ProductController(IRepositoryData<Product> repositoryData)
+    public ProductController(IRepositoryData<Product> repositoryProduct, IRepositoryData<Category> repositoryCategory) 
     {
-        _repositoryData = repositoryData;
+        _repositoryProduct = repositoryProduct;
+        _repositoryCategory = repositoryCategory;
     }
 
-    
+
     [HttpPost]
     public IActionResult PostProduct(ProductDto dto)
     {
-        Product product = new Product
+        var product = new Product
         {
             Name = dto.Name,
             Description = dto.Description,
             Image = dto.Image,
             StockValue = dto.StockValue,
             Color = dto.Color,
-            Family = dto.Family,
+            Family = dto.Family
         };
 
-        foreach (int categoryId in dto.Categories)
+        foreach (var categoryId in dto.Categories)
         {
             var category = _repositoryCategory.GetById(categoryId);
-            if (category != null)
-            {
-                product.Categories.Add(category);
-            }
+            if (category != null) product.Categories.Add(category);
         }
 
-        _repositoryData.Create(product);
+        _repositoryProduct.Create(product);
         return CreatedAtAction(nameof(PostProduct), new
         {
             Message = "Produit créé",
             Product = product
         });
     }
-    
+
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult GetProducts() 
+    public IActionResult GetProducts()
     {
-        return Ok(_repositoryData.GetAll());
+        return Ok(_repositoryProduct.GetAll());
     }
-    
+
     [HttpGet("{id}")]
-    public IActionResult GetById(int id) 
+    public IActionResult GetById(int id)
     {
-        Product product = _repositoryData.GetById(id);
-        if(product != null)
-        {
-            return Ok(product);
-        }
+        var product = _repositoryProduct.GetById(id);
+        if (product != null) return Ok(product);
         return NotFound(
-            new{
+            new
+            {
                 Message = "Produit non trouvé"
             }
         );
     }
 
 
-
     [HttpPut("{id}")]
-    public IActionResult UpdateProduct(ProductDto productDto,int id)
+    public IActionResult UpdateProduct(ProductUpdateDto productUpdateDto, int id)
     {
-        var found = _repositoryData.GetById(id);
-        if (found == null) return NotFound("Client introuvable");
+        var found = _repositoryProduct.GetById(id);
+        if (found == null) return NotFound("Produit introuvable");
         foreach (var prop in typeof(ProductUpdateDto).GetProperties())
-        {
-            if(prop.GetValue(productDto) != null)
-            {
-                found.GetType().GetProperty(prop.Name).SetValue(found, prop.GetValue(productDto));
-            }
-                
-        }
+            if (prop.GetValue(productUpdateDto) != null)
+                found.GetType().GetProperty(prop.Name).SetValue(found, prop.GetValue(productUpdateDto));
 
-        _repositoryData.Update(found);
+        _repositoryProduct.Update(found);
         return Ok(new
         {
             Message = "Produit mis a jour",
             Category = found
         });
-
     }
-    
-    
+
+
     [HttpDelete("{id}")]
     public IActionResult DeleteProduct(int id)
     {
-        var found = _repositoryData.GetById(id);
+        var found = _repositoryProduct.GetById(id);
         if (found == null) return NotFound("Produit introuvable");
-        _repositoryData.Delete(found);
+        _repositoryProduct.Delete(found);
         return Ok("Produit suprimée");
     }
-
-
 }

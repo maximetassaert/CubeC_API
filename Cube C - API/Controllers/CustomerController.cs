@@ -1,4 +1,3 @@
-using Cube_C___API.DTO.Category;
 using Cube_C___API.Dto.Customer;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
@@ -8,67 +7,57 @@ using Role = Cube_C___API.Models.Role;
 
 namespace Cube_C___API.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class CustomerController : ControllerBase
 {
+    private readonly IRepositoryData<Customer> _customerRepository;
+    private readonly IRepositoryData<User> _userRepository;
 
-    private readonly IRepositoryData<Customer> _repositoryData;
-    private readonly IRepositoryData<User> _repository;
 
-
-    public CustomerController(IRepositoryData<Customer> repositoryData)
+    public CustomerController(IRepositoryData<Customer> customerRepository, IRepositoryData<User> userRepository)
     {
-        _repositoryData = repositoryData;
+        _customerRepository = customerRepository;
+        _userRepository = userRepository;
+
     }
-    
-    
+
+
     [HttpPost]
     public IActionResult PostCustomer(CustomerDto dto)
     {
-        Customer customer = new Customer
+        var user = _userRepository.GetById(dto.UserId);
+
+        var customer = new Customer
         {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Birthdate = dto.Birthdate,
             MobileNumber = dto.MobileNumber,
+            User = user
         };
 
-        foreach (int userId in dto.Users)
-        {
-            var user = _repository.GetById(userId);
-            if (user != null)
-            {
-                customer.User = user ;
-            }
-        }
 
-        _repositoryData.Create(customer);
-        return CreatedAtAction(nameof(PostCustomer), new
-        {
-            Message = "Client créé",
-            Customer = customer
-        });
+        _customerRepository.Create(customer);
+        return Ok(customer);
     }
 
     [HttpGet]
     [Authorize(Roles = Role.ADMIN)]
-    public IActionResult GetCategories() 
+    public IActionResult GetCategories()
     {
-        return Ok(_repositoryData.GetAll());
+        return Ok(_customerRepository.GetAll());
     }
-    
+
     [HttpGet("{id}")]
-    public IActionResult GetById(int id) 
+    public IActionResult GetById(int id)
     {
-        Customer customer = _repositoryData.GetById(id);
-        if(customer != null)
-        {
-            return Ok(customer);
-        }
+        var customer = _customerRepository.GetById(id);
+
+        if (customer != null) return Ok(customer);
         return NotFound(
-            new{
+            new
+            {
                 Message = "Client non trouvé"
             }
         );
@@ -76,39 +65,29 @@ public class CustomerController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public IActionResult UpdateCustomer(CustomerDto customersDto,int id)
+    public IActionResult UpdateCustomer(CustomerDto customersDto, int id)
     {
-        var found = _repositoryData.GetById(id);
+        var found = _customerRepository.GetById(id);
         if (found == null) return NotFound("Client introuvable");
         foreach (var prop in typeof(CustomerUpdateDto).GetProperties())
-        {
-            if(prop.GetValue(customersDto) != null)
-            {
+            if (prop.GetValue(customersDto) != null)
                 found.GetType().GetProperty(prop.Name).SetValue(found, prop.GetValue(customersDto));
-            }
-                
-        }
 
-        _repositoryData.Update(found);
+        _customerRepository.Update(found);
         return Ok(new
         {
             Message = "Client mis a jour",
             Category = found
         });
-
     }
 
 
-    
-    
     [HttpDelete("{id}")]
     public IActionResult DeleteCustomer(int id)
     {
-        var found = _repositoryData.GetById(id);
+        var found = _customerRepository.GetById(id);
         if (found == null) return NotFound("Client introuvable");
-        _repositoryData.Delete(found);
+        _customerRepository.Delete(found);
         return Ok("Client suprimée");
     }
 }
-    
-    

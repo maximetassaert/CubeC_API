@@ -2,16 +2,16 @@ using System.Text;
 using Cube_C___API;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using AppContext = Cube_C___API.ApplicationDbContext;
 
-DotNetEnv.Env.Load();
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+Env.Load();
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +45,7 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            new string[] { }
         }
     };
 
@@ -53,13 +53,19 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+    options.UseMySQL(Environment.GetEnvironmentVariable("connectionString")));
 builder.Services.AddScoped<IRepositoryData<Role>, RoleRepository>();
+builder.Services.AddScoped<IRepositoryData<Customer>, CustomerRepository>();
 builder.Services.AddScoped<CustomerRepository>();
+
 builder.Services.AddScoped<CartRepository>();
 builder.Services.AddScoped<JwtAuthenticationService>();
 builder.Services.AddScoped<IRepositoryData<Product>, ProductRepository>();
+builder.Services.AddScoped<IRepositoryData<Supplier>, SupplierRepository>();
+builder.Services.AddScoped<IRepositoryData<User>, UserRepository>();
+builder.Services.AddScoped<UserRepository>();
+
 
 builder.Services.AddSession();
 
@@ -69,22 +75,20 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    options.TokenValidationParameters = new TokenValidationParameters()
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
         ValidateAudience = false,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("Jwt-secret")))
+        IssuerSigningKey =
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("Jwt-secret")))
     };
 });
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy =>
-        {
-            policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
-        });
+    options.AddPolicy(MyAllowSpecificOrigins,
+        policy => { policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod(); });
 });
 
 builder.Services.AddMvc(config =>

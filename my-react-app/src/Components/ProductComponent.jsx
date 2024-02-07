@@ -1,16 +1,14 @@
 import React, {useState} from "react";
-import {TextField, Typography,} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import {Typography,} from "@mui/material";
+import {LoadingButton} from "@mui/lab";
 
-import {Link, useNavigate} from "react-router-dom"
-import axios, {HttpStatusCode} from 'axios';
+import {useNavigate} from "react-router-dom"
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
-import { Button } from "./ui/button"
 
 
 const ProductComponent = (props) => {
-    const { product } = props;
+    const {product} = props;
 
 
     const [cookie, setCookie] = useCookies(['bearerToken', 'cart']);
@@ -26,26 +24,25 @@ const ProductComponent = (props) => {
             .filter(el => el.name)
             .reduce((a, b) => ({...a, [b.name]: b.value}), {});
 
-        const productToAdd ={
+        const productToAdd = {
             productId: formData.productId,
             quantity: 1
         }
 
         const currentCart = cookie.cart;
-        if(!currentCart){
+        if (!currentCart) {
             const currentCart = {
                 customerId: 0,
-                cartLines: [ productToAdd ],
+                cartLines: [productToAdd],
             }
             const cart = await CartsService.createCart(currentCart, cookie.bearerToken)
-            console.log(cart)
-            setCookie('cart', cart)
+            if (cart) setCookie('cart', cart)
         } else {
             const productInCart = currentCart.cartLines.find(product => product.productId == productToAdd.productId)
 
-            if(productInCart){
+            if (productInCart) {
                 productInCart.quantity += 1;
-            }else{
+            } else {
                 currentCart.cartLines.push(productToAdd)
             }
             const cart = await CartsService.updateCart(currentCart, cookie.bearerToken)
@@ -56,19 +53,20 @@ const ProductComponent = (props) => {
     }
 
     return (
-        <React.Fragment >
-            <form autoComplete="off" onSubmit={handleSubmit} >
+        <React.Fragment>
+            <form autoComplete="off" onSubmit={handleSubmit}>
                 <h2>{product.name}</h2>
 
                 <Typography>
-                    { product.description }
+                    {product.description}
                 </Typography>
                 <img src={product.image} width="80px"/>
                 <Typography>
                     {product.price} € TTC
                 </Typography>
 
-                <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>Ajouter au panier</LoadingButton>
+                <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>Ajouter au
+                    panier</LoadingButton>
                 <input hidden value={product.id} readOnly name="productId"/>
             </form>
         </React.Fragment>

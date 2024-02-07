@@ -1,5 +1,3 @@
-using Cube_C___API.Dtos.Role;
-using Cube_C___API.Dtos.User;
 using Cube_C___API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,45 +5,8 @@ namespace Cube_C___API.Repositories;
 
 public class UserRepository : BaseRepository, IRepositoryData<User>
 {
-    
-    public UserRepository(ApplicationDbContext dbContext): base(dbContext)
-    {}
-    public IEnumerable<GetUserDto> FindAll()
+    public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
-        // return _context.Users
-        //     .Include(user => user.Roles)
-        //     .ToList();
-        return _dbContext.Users
-            .Include(user => user.Roles)
-            .Select(user => new GetUserDto
-            {
-                Id = user.Id,
-                Mail = user.Mail,
-                Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name}).ToList()
-            })
-            .ToList();
-        }
-    
-    public GetUserDto? FindById(int id)
-    {
-        return _dbContext.Users
-            .Include(user => user.Roles)
-            // .Find(id);
-            .Where(user => user.Id == id )
-            .Select(user => new GetUserDto
-            {
-                Id = user.Id,
-                Mail = user.Mail,
-                Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name}).ToList()
-            })
-            .FirstOrDefault(user => user.Id == id);
-    }
-    
-    public User? findByEmail(string mail)
-    {
-        return _dbContext.Users
-            .Include(user => user.Roles)
-            .FirstOrDefault(user => user.Mail == mail);
     }
 
 
@@ -78,5 +39,39 @@ public class UserRepository : BaseRepository, IRepositoryData<User>
         _dbContext.Remove(entity);
         _dbContext.SaveChanges();
         return true;
+    }
+
+    public IEnumerable<User> FindAll()
+    {
+        // return _context.Users
+        //     .Include(user => user.Roles)
+        //     .ToList();
+        return _dbContext.Users
+            .Include(user => user.Roles)
+            .ToList();
+
+
+        //.Select(user => new GetUserDto
+        // {
+        //     Id = user.Id,
+        //     Mail = user.Mail,
+        //     Roles = user.Roles.Select(role => new GetRoleDto { Name = role.Name }).ToList()
+        // })
+    }
+
+    public User? FindById(int id)
+    {
+        return _dbContext.Users
+            .Include(user => user.Roles)
+            // .Find(id);
+            .Where(user => user.Id == id)
+            .FirstOrDefault(user => user.Id == id);
+    }
+
+    public User? findByEmail(string mail)
+    {
+        return _dbContext.Users
+            .Include(user => user.Roles)
+            .FirstOrDefault(user => user.Mail == mail);
     }
 }
