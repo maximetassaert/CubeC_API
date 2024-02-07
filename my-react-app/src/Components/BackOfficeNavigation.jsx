@@ -10,7 +10,7 @@ const BackOfficeNavigation = () => {
             <ul>
                 <li><Link to={'/backoffice/products'}>Gestion des produits</Link></li>
                 <li>Inventaire</li>
-                <li>Gestion des produits</li>
+                <li><Link to={'/backoffice/suppliers'}>Gestion des fournisseurs</Link></li>
                 <li>Commandes fournisseurs</li>
                 <li>Clients</li>
                 <li>Commandes clients</li>

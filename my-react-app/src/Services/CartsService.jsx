@@ -15,7 +15,7 @@ export default class CartsService {
             const cartResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/carts/' + cartId, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
-            if(error.response.status === HttpStatusCode.Forbidden){
+            if(error.response?.status === HttpStatusCode.Forbidden){
                 console.error("Vous n'avez pas le droit de récupérer ce panier...")
             }else{
                 console.error('Erreur de récupération du panier', error)
@@ -29,7 +29,7 @@ export default class CartsService {
             const cartResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/carts/', cart, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
-            if(error.response.status === HttpStatusCode.Forbidden){
+            if(error.response?.status === HttpStatusCode.Forbidden){
                 console.error("ah...")
             }else{
                 console.error('Erreur de récupération du panier', error)
@@ -44,7 +44,7 @@ export default class CartsService {
             return cartResult.data;
         }catch(error){
             console.error(error)
-            if(error.response.status === HttpStatusCode.Forbidden){
+            if(error.response?.status === HttpStatusCode.Forbidden){
                 console.error("ah...")
             }else{
                 console.error('Erreur de récupération du panier', error)

@@ -4,7 +4,7 @@ export default class ProductsService {
 
      static async findAll(){
         try{
-            const productsResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/products');
+            const productsResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/product');
             return productsResult.data;
         }catch(error){
             console.error('Erreur de récupération des produits', error)
@@ -16,7 +16,7 @@ export default class ProductsService {
                 const productResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/product/', product, this.configHeaders(token));
                 return productResult.data;
             }catch(error){
-                if(error.response.status === HttpStatusCode.Forbidden){
+                if(error.response?.status === HttpStatusCode.Forbidden){
                     console.error("ah...")
                 }else{
                     console.error('Erreur de mise à jour du produit', error)
@@ -25,5 +25,11 @@ export default class ProductsService {
             }
      }
 
-
+    static configHeaders(bearerToken)  {
+        return {
+            headers: {
+                'Authorization': 'Bearer ' + bearerToken
+            }
+        }
+    }
 }
