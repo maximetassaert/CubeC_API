@@ -1,64 +1,43 @@
 
 using Cube_C___API.Models;
 namespace Cube_C___API.Repositories;
-using Microsoft.EntityFrameworkCore;
 
-public class AddressRepository : IDisposable
+public class AddressRepository : BaseRepository, IRepositoryData<Address>
 {
-    private readonly AppContext _context;
+    private readonly ApplicationDbContext _dbcontext;
 
-    public AddressRepository(AppContext context)
+    public AddressRepository(ApplicationDbContext dbContext) : base(dbContext)
+    {}
+    
+    public Address GetById(int id)
     {
-        _context = context;
+        return _dbcontext.Addresses.Find(id);
     }
 
-    public IEnumerable<Address> FindAll()
+    public List<Address> GetAll()
     {
-        return _context.Addresses.ToList();
+        return _dbcontext.Addresses.ToList();
     }
 
-    public Address FindById(int id)
+    public bool Create(Address entity)
     {
-        return _context.Addresses.Find(id);
+        _dbcontext.Add(entity);
+        _dbcontext.SaveChanges();
+        return true;
     }
 
-    public void Insert(Address address)
+    public bool Update(Address entity)
     {
-        _context.Addresses.Add(address);
+        _dbcontext.Update(entity);
+        _dbcontext.SaveChanges();
+        return true;
     }
 
-    public void Delete(int id)
+    public bool Delete(Address entity)
     {
-        Address address = _context.Addresses.Find(id);
-        _context.Addresses.Remove(address);
-    }
-
-    public void Update(Address address)
-    {
-        _context.Entry(address).State = EntityState.Modified;
-    }
-
-    public void Save()
-    {
-        _context.SaveChanges();
+        _dbcontext.Remove(entity);
+        _dbcontext.SaveChanges();
+        return true;
     }
     
-    private bool disposed = false;
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!this.disposed)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-        }
-        this.disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
 }

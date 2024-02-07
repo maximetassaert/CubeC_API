@@ -20,9 +20,18 @@ public class Product
     public string Color { get; set; }
     [Required]
     public string Family { get; set; }
-    
-    [Required]
-    public int CategoryId { get; set; }
-    [JsonIgnore]
-    public Category? Category { get; set; }
+
+    public List<Category> Categories { get; set; } = new List<Category>();
+
+    // public Product(string name, string description, string image, string stockValue, string color, string family,
+    //     List<Category> categories)
+    // {
+    //     Name = name;
+    //     Description = description;
+    //     Image = image;
+    //     StockValue = stockValue;
+    //     Color = color;
+    //     Family = family;
+    //     Categories = categories;
+    // }
 }

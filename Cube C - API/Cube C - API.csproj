@@ -8,6 +8,8 @@
 	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
 
       <UserSecretsId>535ad449-b8c8-4ddd-9785-5dc627fa5935</UserSecretsId>
+
+      <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
     <ItemGroup>

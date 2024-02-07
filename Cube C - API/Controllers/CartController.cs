@@ -8,23 +8,17 @@ namespace Cube_C___API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CartsController : ControllerBase
+public class CartController : ControllerBase
 {
-    private readonly ILogger<CartsController> _logger;
-    private readonly CartsRepository CartsRepository;
+    private readonly ILogger<CartController> _logger;
+    private readonly CartRepository _cartRepository;
 
-    public CartsController(CartsRepository cartsRepository, ILogger<CartsController> logger)
+    public CartController(CartRepository cartRepository, ILogger<CartController> logger)
     {
-        CartsRepository = cartsRepository;
+        _cartRepository = cartRepository;
         _logger = logger;
     }
-
-    [HttpGet]
-    public IEnumerable<Cart> FindAllCarts()
-    {
-        return CartsRepository.FindAll();
-    }
-
+    
     [HttpPost]
     public Cart Create(Cart cart)
     {
@@ -37,10 +31,17 @@ public class CartsController : ControllerBase
                 int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
             cart.CustomerId = customerId;
         }
-        CartsRepository.Insert(cart);
-        CartsRepository.Save();
+        _cartRepository.Create(cart);
         return cart;
     }
+
+    [HttpGet]
+    public IEnumerable<Cart> FindAllCarts()
+    {
+        return _cartRepository.GetAll();
+    }
+
+
 
     [HttpGet]
     [Route("{id}")]
@@ -55,9 +56,9 @@ public class CartsController : ControllerBase
             var customerId =
                 int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
         
-            return CartsRepository.FindCartByCustomer(customerId);
+            return _cartRepository.FindCartByCustomer(customerId);
         }
-        return CartsRepository.FindById(id);
+        return _cartRepository.FindCartByCustomer(id);
     }
     
     [HttpPut]
@@ -73,8 +74,16 @@ public class CartsController : ControllerBase
             cart.CustomerId = customerId;
         }
         
-        CartsRepository.Update(cart);
-        CartsRepository.Save();
+        _cartRepository.UpdateAll(cart);
         return cart;
+    }
+    
+    [HttpDelete("{id}")]
+    public IActionResult DeleteIngredient(int id)
+    {
+        var found = _cartRepository.GetById(id);
+        if (found == null) return NotFound("Ingredient introuvable");
+        _cartRepository.Delete(found);
+        return Ok("Ingredient suprimé");
     }
 }

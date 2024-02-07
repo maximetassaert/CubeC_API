@@ -4,7 +4,9 @@ export default class ProductsService {
 
      static async findAll(){
         try{
+
             const productsResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/product');
+
             return productsResult.data;
         }catch(error){
             console.error('Erreur de récupération des produits', error)
