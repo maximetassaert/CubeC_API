@@ -37,7 +37,7 @@ public class AuthController : ControllerBase
 
         string token = _jwtAuthenticationService.GenerateToken(user);
 
-        return new JsonResult(new JwtTokenDto(token));
+        return new JsonResult(new JwtTokenDto(token, user.Roles));
 
     }
 

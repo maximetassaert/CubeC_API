@@ -34,9 +34,12 @@ const CartContentComponent = () => {
                 <>Votre panier est vide</>
             }
             {!isLoading && myCart && myCart.cartLines.length > 0 &&
-                myCart.cartLines.map((product, key) => {
+                myCart.cartLines.map((cartLine, key) => {
                     return (
-                        <Typography key={key} >{product.name} : {product.quantity}</Typography>
+                        <>
+                            <img src={cartLine.product.image} width="80x"/>
+                            <Typography key={key} >{cartLine.product.name} : {cartLine.quantity}</Typography>
+                        </>
                     )
                 })
             }
