@@ -10,41 +10,41 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import {useCookies} from "react-cookie";
 import SupplierService from "../Services/SupplierService.jsx"; // Theme
 
-const BackOfficeSuppliersPage = () => {
+const BackOfficeCustomersPage = () => {
     const [cookie, setCookie] = useCookies(['bearerToken']);
 
 
     const [rowData, setRowData] = useState([
-        { nom: "...", "numéro tva": "...", téléphone: 0}
+        { nom: "...", prenom: "...", téléphone: 0}
     ]);
 
     // Column Definitions: Defines & controls grid columns.
     const [colDefs, setColDefs] = useState([
         { field: "nom",     editable: true,
         },
-        { field: "numéro tva" ,        editable: true
+        { field: "prenom" ,        editable: true
         },
         { field: "téléphone",        editable: true
         }
     ]);
 
     useEffect(() => {
-        async function fetchSuppliers() {
-            let suppliers = await SupplierService.findAll(cookie.bearerToken);
+        async function fetchCustomers() {
+            let customers = await SupplierService.findAll(cookie.bearerToken);
 
-            suppliers = suppliers.map(supplier => {
-                return {id: supplier.id, nom: supplier.CompanyName, "téléphone": supplier.MobileNumber, "numéro_tva": supplier.VatNumber}
+            customers = customers.map(supplier => {
+                return {id: supplier.id, nom: supplier.LastName, prenom: supplier.FirstName, "téléphone": supplier.MobileNumber}
             })
-            setRowData(suppliers)
+            setRowData(customers)
         }
-        fetchSuppliers();
+        fetchCustomers();
     }, [])
 
     const onCellValueChanged = useCallback(event => {
-        const supplierDto = event.data;
-        const supplier = {id: supplierDto.id, companyName: supplierDto.nom, mobileNumber: supplierDto.téléphone, vatNumber: supplierDto.numéro_tva}
+        const customerDto = event.data;
+        const customer = {id: customerDto.id, firstName: customerDto.prenom, lastName: customerDto.nom, mobileNumber: customerDto.téléphone}
 
-            SupplierService.putSupplier(supplier, cookie.bearerToken);
+        SupplierService.putCustomer(customer, cookie.bearerToken);
     }, []
     )
 
@@ -67,4 +67,4 @@ const BackOfficeSuppliersPage = () => {
     );
 }
 
-export default BackOfficeSuppliersPage;
+export default BackOfficeCustomersPage;

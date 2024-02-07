@@ -12,7 +12,7 @@ const BackOfficeNavigation = () => {
                 <li>Inventaire</li>
                 <li><Link to={'/backoffice/suppliers'}>Gestion des fournisseurs</Link></li>
                 <li>Commandes fournisseurs</li>
-                <li>Clients</li>
+                <li><Link to={'/backoffice/customers'}>Gestion des clients</Link></li>
                 <li>Commandes clients</li>
             </ul>
         </React.Fragment>

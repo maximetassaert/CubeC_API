@@ -1,30 +1,30 @@
 import axios, {HttpStatusCode} from "axios";
 
-export default class SupplierService {
+export default class CustomerService {
 
      static async findAll(token){
         try{
-            const supplierResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/suppliers', this.configHeaders(token));
-            return supplierResult.data;
+            const customerResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/customer', this.configHeaders(token));
+            return customerResult.data;
         }catch(error){
             if(error.response?.status === HttpStatusCode.Forbidden){
                 console.error("ah...")
             }else{
-                console.error('Erreur de récupération des fournisseurs', error)
+                console.error('Erreur de récupération des clients', error)
 
             }
         }
     }
 
-    static async putSupplier(supplier, token){
+    static async putCustomer(customer, token){
             try{
-                const supplierResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/supplier/', supplier, this.configHeaders(token));
-                return supplierResult.data;
+                const customerResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/customer/', customer, this.configHeaders(token));
+                return customerResult.data;
             }catch(error){
                 if(error.response?.status === HttpStatusCode.Forbidden){
                     console.error("ah...")
                 }else{
-                    console.error('Erreur de mise à jour du fournisseur', error)
+                    console.error('Erreur de mise à jour du client', error)
 
                 }
             }
