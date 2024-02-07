@@ -10,12 +10,12 @@ namespace Cube_C___API.Controllers;
 public class AuthController : ControllerBase
 {
 
-    private readonly ILogger<UsersController> _logger;
+    private readonly ILogger<UserController> _logger;
     private readonly JwtAuthenticationService _jwtAuthenticationService;
 
 
 
-    public AuthController(JwtAuthenticationService jwtAuthenticationService, ILogger<UsersController> logger)
+    public AuthController(JwtAuthenticationService jwtAuthenticationService, ILogger<UserController> logger)
     {
         _jwtAuthenticationService = jwtAuthenticationService;
         _logger = logger;

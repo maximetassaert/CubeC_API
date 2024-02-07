@@ -12,7 +12,7 @@ export default class CartsService {
     static async loadCart(cartId, token){
 
         try{
-            const cartResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/carts/' + cartId, this.configHeaders(token));
+            const cartResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/cart/' + cartId, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
             if(error.response.status === HttpStatusCode.Forbidden){
@@ -26,7 +26,7 @@ export default class CartsService {
 
     static async updateCart(cart, token){
         try{
-            const cartResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/carts/', cart, this.configHeaders(token));
+            const cartResult = await axios.put(import.meta.env.VITE_API_BASE_URL + '/cart/', cart, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
             if(error.response.status === HttpStatusCode.Forbidden){
@@ -40,7 +40,7 @@ export default class CartsService {
 
     static async createCart(cart, token){
         try{
-            const cartResult = await axios.post(import.meta.env.VITE_API_BASE_URL + '/carts/', cart, this.configHeaders(token));
+            const cartResult = await axios.post(import.meta.env.VITE_API_BASE_URL + '/cart/', cart, this.configHeaders(token));
             return cartResult.data;
         }catch(error){
             console.error(error)

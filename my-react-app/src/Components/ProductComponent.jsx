@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom"
 import axios, {HttpStatusCode} from 'axios';
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 
 
 const ProductComponent = (props) => {

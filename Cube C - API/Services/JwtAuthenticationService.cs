@@ -12,18 +12,18 @@ using Microsoft.IdentityModel.Tokens;
 public class JwtAuthenticationService
 {
 
-    private readonly UsersRepository _usersRepository;
-    private readonly CustomersRepository _customersRepository;
+    private readonly UserRepository _userRepository;
+    private readonly CustomerRepository _customerRepository;
 
-    public JwtAuthenticationService(UsersRepository usersRepository, CustomersRepository customersRepository)
+    public JwtAuthenticationService(UserRepository userRepository, CustomerRepository customerRepository)
     {
-        _customersRepository = customersRepository;
-        _usersRepository = usersRepository;
+        _customerRepository = customerRepository;
+        _userRepository = userRepository;
     }
     
     public User? Authenticate(string email, string password)
     {
-        User? user = _usersRepository.findByEmail(email);
+        User? user = _userRepository.findByEmail(email);
         if (user == null)
         {
             // user existe pas
@@ -47,7 +47,7 @@ public class JwtAuthenticationService
             new Claim("userId", user.Id.ToString())
         };
 
-        var customer = _customersRepository.FindByUserId(user.Id);
+        var customer = _customerRepository.FindByUserId(user.Id);
         if (customer != null)
         {
             claims.Add(new Claim("customerId", customer.Id.ToString()));

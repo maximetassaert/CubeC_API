@@ -9,7 +9,7 @@ export default class ProductsService {
             }
         }
         try{
-            const productsResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/products', config);
+            const productsResult = await axios.get(import.meta.env.VITE_API_BASE_URL + '/product', config);
             return productsResult.data;
         }catch(error){
             console.error('Erreur de récupération des produits', error)

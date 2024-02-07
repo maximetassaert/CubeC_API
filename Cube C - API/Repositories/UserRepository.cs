@@ -5,20 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cube_C___API.Repositories;
 
-public class UsersRepository : IDisposable
+public class UserRepository : BaseRepository, IRepositoryData<User>
 {
-    private readonly AppContext _context;
     
-    public UsersRepository(AppContext context)
-    {
-        _context = context;
-    }
+    public UserRepository(ApplicationDbContext dbContext): base(dbContext)
+    {}
     public IEnumerable<GetUserDto> FindAll()
     {
         // return _context.Users
         //     .Include(user => user.Roles)
         //     .ToList();
-        return _context.Users
+        return _dbContext.Users
             .Include(user => user.Roles)
             .Select(user => new GetUserDto
             {
@@ -31,7 +28,7 @@ public class UsersRepository : IDisposable
     
     public GetUserDto? FindById(int id)
     {
-        return _context.Users
+        return _dbContext.Users
             .Include(user => user.Roles)
             // .Find(id);
             .Where(user => user.Id == id )
@@ -46,42 +43,40 @@ public class UsersRepository : IDisposable
     
     public User? findByEmail(string mail)
     {
-        return _context.Users
+        return _dbContext.Users
             .Include(user => user.Roles)
             .FirstOrDefault(user => user.Mail == mail);
     }
-    public void Insert(User user)
+
+
+    public User GetById(int id)
     {
-        _context.Users.Add(user);
+        return _dbContext.Users.Find(id);
     }
-    public void Delete(int id)
+
+    public List<User> GetAll()
     {
-        User user = _context.Users.Find(id);
-        _context.Users.Remove(user);
+        return _dbContext.Users.ToList();
     }
-    public void Update(User user)
+
+    public bool Create(User entity)
     {
-        _context.Entry(user).State = EntityState.Modified;
+        _dbContext.Add(entity);
+        _dbContext.SaveChanges();
+        return true;
     }
-    public void Save()
+
+    public bool Update(User entity)
     {
-        _context.SaveChanges();
+        _dbContext.Update(entity);
+        _dbContext.SaveChanges();
+        return true;
     }
-    private bool disposed = false;
-    protected virtual void Dispose(bool disposing)
+
+    public bool Delete(User entity)
     {
-        if (!this.disposed)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-        }
-        this.disposed = true;
-    }
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        _dbContext.Remove(entity);
+        _dbContext.SaveChanges();
+        return true;
     }
 }
