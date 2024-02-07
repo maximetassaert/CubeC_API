@@ -15,6 +15,8 @@ public class Product
     [Required]
     public string StockValue { get; set; }
     [Required]
+    public float Price { get; set; }
+    [Required]
     public string Color { get; set; }
     [Required]
     public string Family { get; set; }

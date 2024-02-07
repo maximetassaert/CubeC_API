@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom"
 import axios, {HttpStatusCode} from 'axios';
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 
 
 const ProductComponent = (props) => {
@@ -56,23 +56,20 @@ const ProductComponent = (props) => {
     }
 
     return (
-        <React.Fragment>
-            <form autoComplete="off" onSubmit={handleSubmit}>
+        <React.Fragment >
+            <form autoComplete="off" onSubmit={handleSubmit} >
                 <h2>{product.name}</h2>
 
                 <Typography>
                     { product.description }
                 </Typography>
-
+                <img src={product.image} width="80px"/>
                 <Typography>
-                    12(en dur ) € TTC
+                    {product.price} € TTC
                 </Typography>
 
                 <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>Ajouter au panier</LoadingButton>
                 <input hidden value={product.id} readOnly name="productId"/>
-                <div>
-                    <Button>Click me</Button>
-                </div>
             </form>
         </React.Fragment>
     );

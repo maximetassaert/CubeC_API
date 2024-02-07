@@ -13,7 +13,7 @@ const MainPage = () => {
         <>
             <HeaderComponent/>
             <main>
-                <div>
+                <div className="flex flex-wrap">
                     <ProductTableComponent/>
                 </div>
             </main>

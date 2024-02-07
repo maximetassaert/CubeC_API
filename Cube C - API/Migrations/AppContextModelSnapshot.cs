@@ -196,6 +196,9 @@ namespace Cube_C___API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<float>("Price")
+                        .HasColumnType("float");
+
                     b.Property<string>("StockValue")
                         .IsRequired()
                         .HasColumnType("longtext");

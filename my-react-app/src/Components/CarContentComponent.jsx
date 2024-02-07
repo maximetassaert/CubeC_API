@@ -37,7 +37,7 @@ const CartContentComponent = () => {
                 myCart.cartLines.map((cartLine, key) => {
                     return (
                         <>
-                            <img src={cartLine.product.image}/>
+                            <img src={cartLine.product.image} width="80x"/>
                             <Typography key={key} >{cartLine.product.name} : {cartLine.quantity}</Typography>
                         </>
                     )
