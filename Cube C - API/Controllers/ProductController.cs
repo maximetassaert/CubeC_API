@@ -14,7 +14,7 @@ public class ProductController : ControllerBase
     private readonly IRepositoryData<Product> _repositoryProduct;
 
 
-    public ProductController(IRepositoryData<Product> repositoryProduct, IRepositoryData<Category> repositoryCategory) 
+    public ProductController(IRepositoryData<Product> repositoryProduct, IRepositoryData<Category> repositoryCategory)
     {
         _repositoryProduct = repositoryProduct;
         _repositoryCategory = repositoryCategory;
@@ -22,6 +22,7 @@ public class ProductController : ControllerBase
 
 
     [HttpPost]
+    [Authorize(Roles = Role.ADMIN)]
     public IActionResult PostProduct(ProductDto dto)
     {
         var product = new Product
@@ -70,6 +71,7 @@ public class ProductController : ControllerBase
 
 
     [HttpPut("{id}")]
+    [Authorize(Roles = Role.ADMIN)]
     public IActionResult UpdateProduct(ProductUpdateDto productUpdateDto, int id)
     {
         var found = _repositoryProduct.GetById(id);
@@ -82,12 +84,13 @@ public class ProductController : ControllerBase
         return Ok(new
         {
             Message = "Produit mis a jour",
-            Category = found
+            Product = found
         });
     }
 
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = Role.ADMIN)]
     public IActionResult DeleteProduct(int id)
     {
         var found = _repositoryProduct.GetById(id);

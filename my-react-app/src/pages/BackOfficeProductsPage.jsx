@@ -71,7 +71,7 @@ const BackOfficeProductsPage = () => {
                 id: productDto.id,
                 name: productDto.nom,
                 description: productDto.description,
-                price: productDto.nom.prix,
+                price: productDto.prix,
                 image: productDto.image,
                 stockValue: productDto.stock,
                 color: productDto.couleur,

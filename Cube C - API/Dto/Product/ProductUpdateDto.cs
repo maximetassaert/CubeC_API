@@ -18,5 +18,8 @@ public class ProductUpdateDto
 
     public string Family { get; set; }
 
-    public List<Category> Categories { get; set; } = new List<Category>();
+    public float Price { get; set; }
+
+
+    public List<Category> Categories { get; set; } = new();
 }
