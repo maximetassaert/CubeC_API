@@ -64,6 +64,7 @@ builder.Services.AddScoped<JwtAuthenticationService>();
 builder.Services.AddScoped<IRepositoryData<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepositoryData<Supplier>, SupplierRepository>();
 builder.Services.AddScoped<IRepositoryData<User>, UserRepository>();
+builder.Services.AddScoped<IRepositoryData<Category>, CategoryRepository>();
 builder.Services.AddScoped<UserRepository>();
 
 
