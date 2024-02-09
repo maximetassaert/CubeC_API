@@ -66,6 +66,7 @@ builder.Services.AddScoped<IRepositoryData<Supplier>, SupplierRepository>();
 builder.Services.AddScoped<IRepositoryData<User>, UserRepository>();
 builder.Services.AddScoped<IRepositoryData<Category>, CategoryRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<SupplierOrderRepository>();
 
 
 builder.Services.AddSession();

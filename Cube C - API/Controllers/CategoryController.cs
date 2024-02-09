@@ -30,7 +30,6 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = Role.ADMIN)]
     public IActionResult GetCategories()
     {
         return Ok(_repositoryData.GetAll());

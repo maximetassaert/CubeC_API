@@ -12,13 +12,16 @@ public class Product
 
     [Required] public string Image { get; set; }
 
-    [Required] public string StockValue { get; set; }
+    [Required] public int StockValue { get; set; }
 
     [Required] public float Price { get; set; }
 
     [Required] public string Color { get; set; }
 
     [Required] public string Family { get; set; }
+
+    public int SupplierId { get; set; }
+    public Supplier Supplier { get; set; }
 
     public List<Category> Categories { get; set; } = new();
 

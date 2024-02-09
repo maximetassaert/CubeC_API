@@ -1,17 +1,18 @@
 using Cube_C___API.Dtos.Role;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cube_C___API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = Role.ADMIN)]
 public class RoleController : ControllerBase
 {
-
     private readonly IRepositoryData<Role> _repositoryData;
-    
+
     public RoleController(IRepositoryData<Role> repositoryData)
     {
         _repositoryData = repositoryData;
@@ -25,7 +26,7 @@ public class RoleController : ControllerBase
         if (_repositoryData.Create(role)) return Ok(role);
         return BadRequest();
     }
-    
+
     [HttpGet]
     // [Route("FindAll")]
     public IActionResult GetRoles()
@@ -36,11 +37,8 @@ public class RoleController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        Role role = _repositoryData.GetById(id);
-        if (role != null)
-        {
-            return Ok(role);
-        }
+        var role = _repositoryData.GetById(id);
+        if (role != null) return Ok(role);
 
         return NotFound(
             new
@@ -50,20 +48,14 @@ public class RoleController : ControllerBase
     }
 
 
-    
     [HttpPut("{id}")]
-    public IActionResult UpdateRole(RoleUpdateDto roleUpdateDto,int id)
+    public IActionResult UpdateRole(RoleUpdateDto roleUpdateDto, int id)
     {
         var found = _repositoryData.GetById(id);
         if (found == null) return NotFound("Role introuvable");
         foreach (var prop in typeof(RoleUpdateDto).GetProperties())
-        {
-            if(prop.GetValue(roleUpdateDto) != null)
-            {
+            if (prop.GetValue(roleUpdateDto) != null)
                 found.GetType().GetProperty(prop.Name).SetValue(found, prop.GetValue(roleUpdateDto));
-            }
-                
-        }
 
         _repositoryData.Update(found);
         return Ok(new
@@ -71,9 +63,8 @@ public class RoleController : ControllerBase
             Message = "Role mis a jour",
             Role = found
         });
-
     }
-    
+
     [HttpDelete("{id}")]
     public IActionResult DeleteRole(int id)
     {
@@ -82,6 +73,4 @@ public class RoleController : ControllerBase
         _repositoryData.Delete(found);
         return Ok("Role supprimé");
     }
-
-    
 }

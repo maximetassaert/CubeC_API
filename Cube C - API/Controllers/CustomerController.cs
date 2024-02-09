@@ -19,7 +19,6 @@ public class CustomerController : ControllerBase
     {
         _customerRepository = customerRepository;
         _userRepository = userRepository;
-
     }
 
 
@@ -65,7 +64,7 @@ public class CustomerController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public IActionResult UpdateCustomer(CustomerDto customersDto, int id)
+    public IActionResult UpdateCustomer(CustomerUpdateDto customersDto, int id)
     {
         var found = _customerRepository.GetById(id);
         if (found == null) return NotFound("Client introuvable");
@@ -77,7 +76,7 @@ public class CustomerController : ControllerBase
         return Ok(new
         {
             Message = "Client mis a jour",
-            Category = found
+            Customer = found
         });
     }
 

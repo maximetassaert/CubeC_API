@@ -7,14 +7,7 @@ const BackOfficeNavigation = () => {
 
     return (
         <React.Fragment >
-            {/* <ul>
-                <li><Link to={'/backoffice/products'}>Gestion des produits</Link></li>
-                <li><Link to={'/backoffice/inventory'}>Inventaire</Link></li>
-                <li><Link to={'/backoffice/suppliers'}>Gestion des fournisseurs</Link></li>
-                <li>Commandes fournisseurs</li>
-                <li><Link to={'/backoffice/customers'}>Gestion des clients</Link></li>
-                <li>Commandes clients</li>
-            </ul> */}
+
         </React.Fragment>
     );
 }
