@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import { Typography, Button } from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
-import ProductComponent from "./ProductComponent.jsx";
 
 const CartContentComponent = () => {
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ const CartContentComponent = () => {
     useEffect(() => {
         fetchMyCart();
     }, [])
-    const fetchMyCart = async () =>{
+    const fetchMyCart = async () => {
         const myCart = await CartsService.loadCart(0, cookie.bearerToken);
         setMyCart(myCart)
         setIsLoading(false)
@@ -36,10 +35,10 @@ const CartContentComponent = () => {
             {!isLoading && myCart && myCart.cartLines.length > 0 &&
                 myCart.cartLines.map((cartLine, key) => {
                     return (
-                        <>
+                        <Box key={key}>
                             <img src={cartLine.product.image} width="80x"/>
-                            <Typography key={key} >{cartLine.product.name} : {cartLine.quantity}</Typography>
-                        </>
+                            <Typography>{cartLine.product.name} : {cartLine.quantity}</Typography>
+                        </Box>
                     )
                 })
             }
