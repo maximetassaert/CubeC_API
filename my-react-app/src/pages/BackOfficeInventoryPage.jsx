@@ -2,15 +2,15 @@ import HeaderComponent from "../Components/HeaderComponent.jsx";
 import Footer from "../Components/Footer.jsx";
 import BackOfficeNavigation from "../Components/BackOfficeNavigation.jsx";
 import {useCallback, useEffect, useState} from "react";
-import { Button } from "@mui/material";
+
 import {AgGridReact} from 'ag-grid-react'; // React Grid Logic
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import ProductsService from "../Services/ProductsService.jsx";
 import {useCookies} from "react-cookie"; // Theme
+import { Container } from "@mui/material";
 
-
-const BackOfficeProductsPage = () => {
+const BackOfficeInventoryPage = () => {
     const [cookie, setCookie] = useCookies(['bearerToken']);
 
 
@@ -26,36 +26,8 @@ const BackOfficeProductsPage = () => {
             field: "nom", editable: true,
         },
         {
-            field: "description", editable: true
-        },
-        {
-            field: "prix", editable: true
-        },
-        {
             field: "stock"
-        }, {
-            field: "image", editable: true
-        },         {
-            field: 'couleur',
-            editable: true,
-            cellEditor: 'agSelectCellEditor',
-            cellEditorParams: {
-              values: [
-                'Rosé',
-                'Rouge',
-                'Blanc'],
-            },
-          },
-          {
-            field: 'famille',
-            editable: true,
-            cellEditor: 'agSelectCellEditor',
-            cellEditorParams: {
-              values: [
-                'Pétillant',
-                'Plat'],
-            },
-          },
+        },
 
     ]);
 
@@ -97,29 +69,29 @@ const BackOfficeProductsPage = () => {
             ProductsService.putProduct(product, cookie.bearerToken);
         }, []
     )
+    const autoSizeStrategy = {
+        type: 'fitCellContents'
+    };
 
     return (
         <>
             <HeaderComponent/>
-           
             <BackOfficeNavigation/>
-
-            <Button variant="contained" color="secondary">
-                Ouvrir la modal
-            </Button>
-            <main>
+            <Container maxWidth="xl">
+            <main >
                 <div className="flex flex-wrap">
                     <div className="ag-theme-quartz" style={{height: 500}}>
                         {/* The AG Grid component */}
-                        <AgGridReact rowData={rowData} columnDefs={colDefs} onCellValueChanged={onCellValueChanged}/>
+                        <AgGridReact autoSizeStrategy={autoSizeStrategy} rowData={rowData} columnDefs={colDefs} onCellValueChanged={onCellValueChanged}/>
                     </div>
                 </div>
                     
             </main>
+            </Container>
             <Footer/>
         </>
 
     );
 }
 
-export default BackOfficeProductsPage;
+export default BackOfficeInventoryPage;

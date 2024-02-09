@@ -2,7 +2,7 @@ export default function Footer () {
     return(
         <footer>
             <div>
-                pute
+                Merci dieu
             </div>
         </footer>
     )
