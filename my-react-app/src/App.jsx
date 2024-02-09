@@ -7,6 +7,9 @@ import BackOfficeMainPage from "./pages/BackOfficeMainPage.jsx";
 import BackOfficeProductsPage from "./pages/BackOfficeProductsPage.jsx";
 import BackOfficeSuppliersPage from "./pages/BackOfficeSuppliersPage.jsx";
 import BackOfficeCustomersPage from "./pages/BackOfficeCustomersPage.jsx";
+import BackOfficeInventoryPage from "./pages/BackOfficeInventoryPage.jsx";
+import SignUpForm from "./Components/SignUpForm.jsx";
+import BackOfficeSuppliersOrdersPage from "./pages/BackOfficeSuppliersOrdersPage.jsx";
 
 function App() {
 
@@ -15,7 +18,7 @@ function App() {
             <Routes>
                 <Route path='/*' element={<MainPage/>}/>
                 <Route path='login' element={<LoginFormComponent/>}/>
-                <Route path='Register' element={<Register/>} />
+                <Route path='Register' element={<SignUpForm/>}/>
                 <Route path='myCart' element={<MyCartPage/>}/>
                 <Route path='BackOffice' element={<BackOfficeMainPage/>}/>
                 <Route path='/backoffice/products' element={<BackOfficeProductsPage/>}/>
