@@ -1,7 +1,7 @@
 import HeaderComponent from "../Components/HeaderComponent.jsx";
 import Footer from "../Components/Footer.jsx";
 import {useCallback, useEffect, useState} from "react";
-import { Button } from "@mui/material";
+import {Button} from "@mui/material";
 import {AgGridReact} from 'ag-grid-react'; // React Grid Logic
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css";
@@ -28,33 +28,33 @@ const BackOfficeProductsPage = () => {
             field: "description", editable: true
         },
         {
-            field: "prix", editable: true
+            field: "prix", editable: true, cellDataType: 'number'
         },
         {
-            field: "stock"
+            field: "stock", cellDataType: 'number'
         }, {
             field: "image", editable: true
-        },         {
+        }, {
             field: 'couleur',
             editable: true,
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: {
-              values: [
-                'Rosé',
-                'Rouge',
-                'Blanc'],
+                values: [
+                    'Rosé',
+                    'Rouge',
+                    'Blanc'],
             },
-          },
-          {
+        },
+        {
             field: 'famille',
             editable: true,
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: {
-              values: [
-                'Pétillant',
-                'Plat'],
+                values: [
+                    'Pétillant',
+                    'Plat'],
             },
-          },
+        },
 
     ]);
 
@@ -111,7 +111,7 @@ const BackOfficeProductsPage = () => {
                         <AgGridReact rowData={rowData} columnDefs={colDefs} onCellValueChanged={onCellValueChanged}/>
                     </div>
                 </div>
-                    
+
             </main>
             <Footer/>
         </>

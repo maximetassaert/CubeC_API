@@ -8,7 +8,7 @@ import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import ProductsService from "../Services/ProductsService.jsx";
 import {useCookies} from "react-cookie"; // Theme
-import { Container } from "@mui/material";
+import {Container} from "@mui/material";
 
 const BackOfficeInventoryPage = () => {
     const [cookie, setCookie] = useCookies(['bearerToken']);
@@ -26,7 +26,7 @@ const BackOfficeInventoryPage = () => {
             field: "nom", editable: true,
         },
         {
-            field: "stock", editable: true, 
+            field: "stock", editable: true, cellDataType: 'number'
         },
 
     ]);
@@ -78,15 +78,16 @@ const BackOfficeInventoryPage = () => {
             <HeaderComponent/>
             <BackOfficeNavigation/>
             <Container maxWidth="xl">
-            <main >
-                <div className="flex flex-wrap">
-                    <div className="ag-theme-quartz" style={{height: 500}}>
-                        {/* The AG Grid component */}
-                        <AgGridReact autoSizeStrategy={autoSizeStrategy} rowData={rowData} columnDefs={colDefs} onCellValueChanged={onCellValueChanged}/>
+                <main>
+                    <div className="flex flex-wrap">
+                        <div className="ag-theme-quartz" style={{height: 500}}>
+                            {/* The AG Grid component */}
+                            <AgGridReact autoSizeStrategy={autoSizeStrategy} rowData={rowData} columnDefs={colDefs}
+                                         onCellValueChanged={onCellValueChanged}/>
+                        </div>
                     </div>
-                </div>
-                    
-            </main>
+
+                </main>
             </Container>
             <Footer/>
         </>

@@ -12,7 +12,7 @@ public class ProductUpdateDto
 
     public string Image { get; set; }
 
-    public string StockValue { get; set; }
+    public int StockValue { get; set; }
 
     public string Color { get; set; }
 
