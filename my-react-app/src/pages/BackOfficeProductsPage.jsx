@@ -1,6 +1,5 @@
 import HeaderComponent from "../Components/HeaderComponent.jsx";
 import Footer from "../Components/Footer.jsx";
-import BackOfficeNavigation from "../Components/BackOfficeNavigation.jsx";
 import {useCallback, useEffect, useState} from "react";
 
 import {AgGridReact} from 'ag-grid-react'; // React Grid Logic
@@ -84,7 +83,6 @@ const BackOfficeProductsPage = () => {
     return (
         <>
             <HeaderComponent/>
-            <BackOfficeNavigation/>
 
             <main>
                 <div className="flex flex-wrap">

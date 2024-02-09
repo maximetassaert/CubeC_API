@@ -1,5 +1,3 @@
-using Cube_C___API.Models;
-
 namespace Cube_C___API.Dto.Product;
 
 public class ProductDto
@@ -12,12 +10,13 @@ public class ProductDto
 
     public string Image { get; set; }
 
-    public string StockValue { get; set; }
+    public int StockValue { get; set; }
 
     public string Color { get; set; }
 
     public string Family { get; set; }
 
-    public List<int> Categories { get; set; } = new List<int>();
+    public int SupplierId { get; set; }
 
+    public List<int> Categories { get; set; } = new();
 }

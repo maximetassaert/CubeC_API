@@ -37,6 +37,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
+    [Authorize(Roles = Role.ADMIN)]
     public User FindById(int id)
     {
         return _userRepository.FindById(id);

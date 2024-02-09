@@ -7,23 +7,26 @@ import BackOfficeMainPage from "./pages/BackOfficeMainPage.jsx";
 import BackOfficeProductsPage from "./pages/BackOfficeProductsPage.jsx";
 import BackOfficeSuppliersPage from "./pages/BackOfficeSuppliersPage.jsx";
 import BackOfficeCustomersPage from "./pages/BackOfficeCustomersPage.jsx";
+import BackOfficeSuppliersOrdersPage from "./pages/BackOfficeSuppliersOrdersPage.jsx";
 
 function App() {
 
-  return (
-    <>
-        <Routes>
-            <Route path='/*' element={<MainPage/>} />
-            <Route path='login' element={<LoginFormComponent/>} />
-            <Route path='myCart' element={<MyCartPage/>} />
-            <Route path='BackOffice' element={<BackOfficeMainPage/>}/>
-            <Route path='/backoffice/products' element={<BackOfficeProductsPage/>}/>
-            <Route path='/backoffice/suppliers' element={<BackOfficeSuppliersPage/>}/>
-            <Route path='/backoffice/customers' element={<BackOfficeCustomersPage/>}/>
+    return (
+        <>
+            <Routes>
+                <Route path='/*' element={<MainPage/>}/>
+                <Route path='login' element={<LoginFormComponent/>}/>
+                <Route path='myCart' element={<MyCartPage/>}/>
+                <Route path='BackOffice' element={<BackOfficeMainPage/>}/>
+                <Route path='/backoffice/products' element={<BackOfficeProductsPage/>}/>
+                <Route path='/backoffice/suppliers' element={<BackOfficeSuppliersPage/>}/>
+                <Route path='/backoffice/customers' element={<BackOfficeCustomersPage/>}/>
+                <Route path='/backoffice/suppliersOrders' element={<BackOfficeSuppliersOrdersPage/>}/>
 
-        </Routes>
-    </>
-  )
+
+            </Routes>
+        </>
+    )
 }
 
 export default App

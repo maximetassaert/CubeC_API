@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Cube_C___API.Dto.Cart;
 using Cube_C___API.Models;
 using Cube_C___API.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -20,17 +21,22 @@ public class CartController : ControllerBase
     }
 
     [HttpPost]
-    public Cart Create(Cart cart)
+    public Cart Create(CartCreateDto cartDto)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         if (identity == null) throw new Exception("L'utilisateur n'est pas connecté ??");
 
-        if (!Utils.IsAdminUser(identity) || cart.CustomerId == 0)
+        if (!Utils.IsAdminUser(identity) || cartDto.CustomerId == 0)
         {
             var customerId =
                 int.Parse((identity.FindFirst("customerId") ?? throw new Exception("customerId inconnu ??")).Value);
-            cart.CustomerId = customerId;
+            cartDto.CustomerId = customerId;
         }
+
+        Cart cart = new();
+        cart.CartLines = cartDto.CartLines;
+        cart.CustomerId = cartDto.CustomerId;
+
 
         _cartRepository.Create(cart);
         return cart;
@@ -81,11 +87,12 @@ public class CartController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteIngredient(int id)
+    [Authorize(Roles = Role.ADMIN)]
+    public IActionResult DeleteCart(int id)
     {
         var found = _cartRepository.GetById(id);
-        if (found == null) return NotFound("Ingredient introuvable");
+        if (found == null) return NotFound("Panier introuvable");
         _cartRepository.Delete(found);
-        return Ok("Ingredient suprimé");
+        return Ok("Panier suprimé");
     }
 }
