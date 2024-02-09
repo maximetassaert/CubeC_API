@@ -26,7 +26,7 @@ const BackOfficeInventoryPage = () => {
             field: "nom", editable: true,
         },
         {
-            field: "stock"
+            field: "stock", editable: true, 
         },
 
     ]);
