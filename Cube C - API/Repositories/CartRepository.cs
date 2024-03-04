@@ -1,26 +1,19 @@
 using Cube_C___API.Models;
-namespace Cube_C___API.Repositories;
 using Microsoft.EntityFrameworkCore;
+
+namespace Cube_C___API.Repositories;
 
 public class CartRepository : BaseRepository, IRepositoryData<Cart>
 {
-
-    public CartRepository(ApplicationDbContext dbContext): base(dbContext)
-    {}
-    
-    public Cart? FindCartByCustomer(int customerId)
+    public CartRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
-        return _dbContext.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product).FirstOrDefault(cart => cart.CustomerId == customerId && cart.Editable);
-    }
-
-    public Cart? FindByCartLineId(int id)
-    {
-        return _dbContext.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product).FirstOrDefault(cart => cart.Id == id);
     }
 
     public Cart GetById(int id)
     {
-        return _dbContext.Carts.Find(id);
+        return _dbContext.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product)
+            .ThenInclude(product => product.Supplier)
+            .FirstOrDefault(cart => cart.Id == id);
     }
 
     public List<Cart> GetAll()
@@ -49,21 +42,26 @@ public class CartRepository : BaseRepository, IRepositoryData<Cart>
         return true;
     }
 
+    public Cart? FindCartByCustomer(int customerId)
+    {
+        return _dbContext.Carts.Include(cart => cart.CartLines).ThenInclude(cartLine => cartLine.Product)
+            .FirstOrDefault(cart => cart.CustomerId == customerId && cart.Editable);
+    }
+
     public void UpdateAll(Cart cartToUpdate)
     {
         //_context.Entry(cartToUpdate).State = EntityState.Modified;
         // soit ça maj cart update soit l'autre mais 2 en même temps ça ne marche pas
         //_context.SaveChanges();
 
-        var existingCart = _dbContext.Carts.Include(cart => cart.CartLines).FirstOrDefault(cart => cart.Id == cartToUpdate.Id);
+        var existingCart = _dbContext.Carts.Include(cart => cart.CartLines)
+            .FirstOrDefault(cart => cart.Id == cartToUpdate.Id);
         if (existingCart != null)
         {
             // Delete children
             foreach (var existingChild in existingCart.CartLines.ToList())
-            {
                 if (cartToUpdate.CartLines.All(c => c.Id != existingChild.Id))
                     _dbContext.CartLines.Remove(existingChild);
-            }
 
             // Update and Insert children
             foreach (var childModel in cartToUpdate.CartLines)
@@ -83,11 +81,8 @@ public class CartRepository : BaseRepository, IRepositoryData<Cart>
                     existingCart.CartLines.Add(childModel);
                 }
             }
-
         }
 
         _dbContext.SaveChanges();
     }
-    
-
 }

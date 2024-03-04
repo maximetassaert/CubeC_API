@@ -60,6 +60,7 @@ builder.Services.AddScoped<IRepositoryData<Customer>, CustomerRepository>();
 builder.Services.AddScoped<CustomerRepository>();
 
 builder.Services.AddScoped<CartRepository>();
+builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddScoped<JwtAuthenticationService>();
 builder.Services.AddScoped<IRepositoryData<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepositoryData<Supplier>, SupplierRepository>();

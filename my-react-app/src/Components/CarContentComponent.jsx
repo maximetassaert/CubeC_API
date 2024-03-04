@@ -4,13 +4,19 @@ import {Box, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom"
 import {useCookies} from "react-cookie";
 import CartsService from "../Services/CartsService.jsx";
+import {LoadingButton} from "@mui/lab";
+import OrderService from "../Services/OrderService.jsx";
 
 const CartContentComponent = () => {
     const navigate = useNavigate();
     const [myCart, setMyCart] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isOrderValidated, setIsOrderValidated] = useState(false);
 
-    const [cookie, setCookie, removeCookie] = useCookies(['bearerToken']);
+    const [orderCreationLoading, setOrderCreationLoading] = useState(false);
+
+
+    const [cookie, setCookie, removeCookie] = useCookies(['bearerToken', 'cart']);
 
 
     useEffect(() => {
@@ -22,18 +28,35 @@ const CartContentComponent = () => {
         setIsLoading(false)
     }
 
+    const handleCartValidation = () => {
+        createOrderFromCart()
+    }
+
+    const createOrderFromCart = async () => {
+        setOrderCreationLoading(true)
+        const orderDto = {customerId: myCart.customerId, cartId: myCart.id};
+        await OrderService.createOrder(orderDto, cookie.bearerToken)
+        setIsOrderValidated(true)
+        setOrderCreationLoading(false);
+        setMyCart(null)
+        removeCookie('cart')
+    }
+
 
     return (
         <>
-            <Typography>Mon panier :</Typography>
-            {!isLoading && !myCart &&
-                <>Vous n'avez pas encore de panier : Ajouter des produits avant de passer au paimeent :) </>
+            {isOrderValidated && <Typography>Votre commande a bien été validée !</Typography>}
+            {!isOrderValidated &&
+                <Typography>Mon panier :</Typography>
             }
-            {!isLoading && myCart && myCart.cartLines.length === 0 &&
+            {!isOrderValidated && !isLoading && !myCart &&
+                <>Vous n'avez pas encore de panier : Ajouter des produits avant de passer au paiement :) </>
+            }
+            {!isOrderValidated && !isLoading && myCart && myCart.cartLines.length === 0 &&
                 <>Votre panier est vide</>
             }
-            {!isLoading && myCart && myCart.cartLines.length > 0 &&
-                myCart.cartLines.map((cartLine, key) => {
+            {!isOrderValidated && !isLoading && myCart && myCart.cartLines.length > 0 && <>
+                {myCart.cartLines.map((cartLine, key) => {
                     return (
                         <Box key={key}>
                             <img src={cartLine.product.image} width="80x"/>
@@ -41,7 +64,13 @@ const CartContentComponent = () => {
                         </Box>
                     )
                 })
-            }
+                }
+
+                <LoadingButton onClick={handleCartValidation} loading={orderCreationLoading}>
+                    Valider mon panier et passer ma commande
+                </LoadingButton>
+
+            </>}
             {isLoading && <>chargement...</>}
         </>
     );
