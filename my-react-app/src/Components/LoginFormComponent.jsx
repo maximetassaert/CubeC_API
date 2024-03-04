@@ -93,7 +93,7 @@ const LoginFormComponent = () => {
                 <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>Login</LoadingButton>
 
             </form>
-            <small>Need an account? <Link to="/">Register here</Link></small>
+            <small>Need an account? <Link to="Register">Register here</Link></small>
         </React.Fragment>
     );
 }

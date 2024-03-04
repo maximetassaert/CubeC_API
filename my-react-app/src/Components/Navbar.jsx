@@ -64,6 +64,8 @@ function Navbar() {
         event.preventDefault();
         removeCookie('bearerToken')
         removeCookie('roles')
+        navigate('/')
+        window.location.reload();
     }
 
     const handleLogin = (event) => {
