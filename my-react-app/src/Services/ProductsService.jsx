@@ -27,6 +27,34 @@ export default class ProductsService {
         }
     }
 
+    static async delete(id, token) {
+        try {
+            const productResult = await axios.delete(import.meta.env.VITE_API_BASE_URL + '/product/' + id, this.configHeaders(token));
+            return productResult.data;
+        } catch (error) {
+            if (error.response?.status === HttpStatusCode.Forbidden) {
+                console.error("ah...")
+            } else {
+                console.error('Erreur de suppréssion du produit', error)
+
+            }
+        }
+    }
+
+    static async post(product, token) {
+        try {
+            const productResult = await axios.post(import.meta.env.VITE_API_BASE_URL + '/product/', product, this.configHeaders(token));
+            return productResult.data;
+        } catch (error) {
+            if (error.response?.status === HttpStatusCode.Forbidden) {
+                console.error("ah...")
+            } else {
+                console.error('Erreur de création du produit', error)
+
+            }
+        }
+    }
+
     static configHeaders(bearerToken) {
         return {
             headers: {

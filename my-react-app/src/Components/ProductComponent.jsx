@@ -65,8 +65,11 @@ const ProductComponent = (props) => {
                     {product.price} € TTC
                 </Typography>
 
-                <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>Ajouter au
-                    panier</LoadingButton>
+                {cookie.bearerToken &&
+                    <LoadingButton variant="outlined" color="secondary" type="submit" loading={isLoading}>
+                        Ajouter au panier
+                    </LoadingButton>
+                }
                 <input hidden value={product.id} readOnly name="productId"/>
             </form>
         </React.Fragment>

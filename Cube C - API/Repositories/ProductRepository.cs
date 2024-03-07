@@ -1,10 +1,13 @@
 using Cube_C___API.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Cube_C___API.Repositories;
 
 public class ProductRepository : BaseRepository, IRepositoryData<Product>
 {
-
-    public ProductRepository(ApplicationDbContext dbContext) : base(dbContext) {}
+    public ProductRepository(ApplicationDbContext dbContext) : base(dbContext)
+    {
+    }
 
 
     public Product GetById(int id)
@@ -14,7 +17,7 @@ public class ProductRepository : BaseRepository, IRepositoryData<Product>
 
     public List<Product> GetAll()
     {
-        return _dbContext.Products.ToList();
+        return _dbContext.Products.Include(product => product.Supplier).ToList();
     }
 
     public bool Create(Product entity)

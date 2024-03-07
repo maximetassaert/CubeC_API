@@ -32,7 +32,10 @@ const ProductTableComponent = () => {
     }, [searchValue, products, colorValue, familyValue])
 
     const handleSearch = () => {
-        if (searchValue.trim() === '') setProductsFiltered(products);
+        if (searchValue.trim() === '') {
+            setProductsFiltered(products);
+            return
+        }
 
         let tmpProducts = products.filter(product => product.name.toLowerCase().includes(searchValue.toLowerCase()))
         if (colorValue !== '') tmpProducts = tmpProducts.filter(product => product.color.toLowerCase() === colorValue.toLowerCase())

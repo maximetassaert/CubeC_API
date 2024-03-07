@@ -12,12 +12,15 @@ public class ProductController : ControllerBase
 {
     private readonly IRepositoryData<Category> _repositoryCategory;
     private readonly IRepositoryData<Product> _repositoryProduct;
+    private readonly IRepositoryData<Supplier> _repositorySupplier;
 
 
-    public ProductController(IRepositoryData<Product> repositoryProduct, IRepositoryData<Category> repositoryCategory)
+    public ProductController(IRepositoryData<Product> repositoryProduct, IRepositoryData<Category> repositoryCategory,
+        IRepositoryData<Supplier> repositorySupplier)
     {
         _repositoryProduct = repositoryProduct;
         _repositoryCategory = repositoryCategory;
+        _repositorySupplier = repositorySupplier;
     }
 
 
@@ -25,6 +28,9 @@ public class ProductController : ControllerBase
     [Authorize(Roles = Role.ADMIN)]
     public IActionResult PostProduct(ProductDto dto)
     {
+        var supplier = _repositorySupplier.GetById(dto.SupplierId);
+        if (supplier == null) return BadRequest("Le fournisseur n'existe pas");
+
         var product = new Product
         {
             Name = dto.Name,
@@ -32,7 +38,8 @@ public class ProductController : ControllerBase
             Image = dto.Image,
             StockValue = dto.StockValue,
             Color = dto.Color,
-            Family = dto.Family
+            Family = dto.Family,
+            Supplier = supplier
         };
 
         foreach (var categoryId in dto.Categories)
@@ -42,11 +49,7 @@ public class ProductController : ControllerBase
         }
 
         _repositoryProduct.Create(product);
-        return CreatedAtAction(nameof(PostProduct), new
-        {
-            Message = "Produit créé",
-            Product = product
-        });
+        return CreatedAtAction(nameof(PostProduct), product);
     }
 
     [HttpGet]
@@ -81,11 +84,7 @@ public class ProductController : ControllerBase
                 found.GetType().GetProperty(prop.Name).SetValue(found, prop.GetValue(productUpdateDto));
 
         _repositoryProduct.Update(found);
-        return Ok(new
-        {
-            Message = "Produit mis a jour",
-            Product = found
-        });
+        return Ok(found);
     }
 
 
