@@ -93,7 +93,7 @@ const BackOfficeProductsPage = () => {
     const handleDelete = async (id) => {
         try {
             await ProductsService.delete(id, cookie.bearerToken)
-            const newRowData = rowData.filter(employee => employee.id !== id)
+            const newRowData = rowData.filter(product => product.id !== id)
             setRowData(newRowData)
         } catch (error) {
             alert(error.response.data)
