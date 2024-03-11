@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Typography,} from "@mui/material";
 import {LoadingButton} from "@mui/lab";
 
@@ -15,10 +15,14 @@ const ProductComponent = (props) => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false)
 
+    useEffect(() => {
+        if (product.stockValue < 0) product.stockValue = 0;
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         setIsLoading(true)
+
 
         const formData = Array.from(event.target.elements)
             .filter(el => el.name)
@@ -62,7 +66,14 @@ const ProductComponent = (props) => {
                 </Typography>
                 <img src={product.image} width="80px"/>
                 <Typography>
-                    {product.price} € TTC
+                    {product.price} € TTC (en carton de 6 : {product.price * 6} € TTC)
+                </Typography>
+
+                <Typography>
+                    {product.stockValue >= 0 && <>
+                        ({product.stockValue} en stock)</>}
+                    {product.stockValue < 0 &&
+                        <>(Pas de stock, commande fournisseur en cours)</>}
                 </Typography>
 
                 {cookie.bearerToken &&

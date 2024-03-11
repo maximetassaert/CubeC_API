@@ -16,7 +16,7 @@ const pages = [
 ];
 const backoffice = [
     {name: 'G.Produits', url: '/backoffice/products'},
-    {name: 'Inventaire', url: '/backoffice/inventory'},
+    {name: 'G.Inventaire', url: '/backoffice/inventory'},
     {name: 'G.Fournisseurs', url: '/backoffice/suppliers'},
     {name: 'Commandes Fournisseurs', url: '/backoffice/suppliersOrders'},
     {name: 'G.Client', url: '/backoffice/customers'},
