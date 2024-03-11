@@ -12,7 +12,8 @@ public class SupplierOrderRepository : BaseRepository, IRepositoryData<SupplierO
 
     public SupplierOrder GetById(int id)
     {
-        return _dbContext.SupplierOrders.Find(id);
+        return _dbContext.SupplierOrders.Include(supplierOrder => supplierOrder.SupplierOrderLines)
+            .ThenInclude(supplierOrderLine => supplierOrderLine.Product).ToList().Find(supplierOrder => supplierOrder.Id == id);
     }
 
     public List<SupplierOrder> GetAll()

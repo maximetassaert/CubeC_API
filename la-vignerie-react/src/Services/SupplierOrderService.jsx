@@ -39,7 +39,21 @@ export default class SupplierOrderService {
         }
     }
 
-    static async createSupplierOrder(supplierOrder, token) {
+    static async delete(id, token) {
+        try {
+            const result = await axios.delete(import.meta.env.VITE_API_BASE_URL + '/supplierOrder/' + id, this.configHeaders(token));
+            return result.data;
+        } catch (error) {
+            if (error.response?.status === HttpStatusCode.Forbidden) {
+                console.error("ah...")
+            } else {
+                console.error('Erreur de mise à jour de la commande fournisseur', error)
+
+            }
+        }
+    }
+
+    static async post(supplierOrder, token) {
         try {
             const result = await axios.post(import.meta.env.VITE_API_BASE_URL + '/supplierOrder/', supplierOrder, this.configHeaders(token));
             return result.data;

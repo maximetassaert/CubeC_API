@@ -36,7 +36,7 @@ public class SupplierOrderController : ControllerBase
         }
 
         _supplierOrderRepository.Create(supplierOrder);
-        return supplierOrder;
+        return _supplierOrderRepository.GetById(supplierOrder.Id);;
     }
 
     [HttpGet]
