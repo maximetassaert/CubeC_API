@@ -19,8 +19,7 @@ const backoffice = [
     {name: 'G.Inventaire', url: '/backoffice/inventory'},
     {name: 'G.Fournisseurs', url: '/backoffice/suppliers'},
     {name: 'Commandes Fournisseurs', url: '/backoffice/suppliersOrders'},
-    {name: 'G.Client', url: '/backoffice/customers'},
-    {name: 'Commandes Clients', url: '/create-client'}
+    {name: 'G.Client', url: '/backoffice/customers'}
 ];
 
 
