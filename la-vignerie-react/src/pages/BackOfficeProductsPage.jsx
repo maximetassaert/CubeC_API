@@ -12,7 +12,7 @@ import SupplierService from "../Services/SupplierService.jsx"; // Theme
 
 const BackOfficeProductsPage = () => {
     const [cookie, setCookie] = useCookies(['bearerToken']);
-    const [suppliers, setSuppliers] = useState(null);
+    const [suppliers, setSuppliers] = useState([]);
 
     const [rowData, setRowData] = useState([]);
 
